@@ -10,9 +10,7 @@
     <name>swan</name>
     <modules>
         <module>swan-annotation</module>
-        <module>swan-common</module>
         <module>swan-core</module>
-        <module>swan-spring-boot-starter</module>
     </modules>
 
     <organization>
