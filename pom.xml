@@ -9,7 +9,6 @@
     <version>1.0.1-SNAPSHOT</version>
     <name>swan</name>
     <modules>
-        <module>swan-annotation</module>
         <module>swan-core</module>
     </modules>
 
