@@ -8,9 +8,12 @@ import java.util.List;
 public class ExcelBuilder {
 
 	private List<Object> list = new ArrayList<Object>();
+	
+    private Class<?> clazz;
  
 	public ExcelBuilder list(List data, Class head) {
 		this.list = data;
+		this.clazz = head;
 		return this;
 	}
 
