@@ -3,7 +3,7 @@ package aaaaaaa;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.zoo.woodpecker.check.ExcelCheck;
+import org.zoo.woodpecker.ExcelCheck;
 
 public class Test {
 

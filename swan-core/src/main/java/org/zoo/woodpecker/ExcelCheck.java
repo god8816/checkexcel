@@ -1,3 +1,3 @@
-package org.zoo.woodpecker.check;
+package org.zoo.woodpecker;
 
 public class ExcelCheck extends ExcelCheckFactory {}
