@@ -12,7 +12,9 @@ public class Test {
 		
 		List<AaBean> listExcel = new ArrayList<AaBean>();
 		
-		List<AaBean> list = ExcelCheck.list(listExcel, AaBean.class).doErrorRecord();
+		List<AaBean> listError = ExcelCheck.list(listExcel, AaBean.class).doErrorRecord();
+		
+		List<AaBean> listRight = ExcelCheck.list(listExcel, AaBean.class).doRightRecord();
 	}
 
 }
