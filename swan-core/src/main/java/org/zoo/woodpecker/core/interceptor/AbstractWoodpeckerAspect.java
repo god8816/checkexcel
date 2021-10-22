@@ -22,49 +22,41 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
+import org.zoo.swan.core.service.SwanTransactionHandler;
 
 /**
- * 
+ * 切入点
  * @author dzc
  */
 @Aspect
 @Component
-public abstract class AbstractSwanTransactionAspect {
+public abstract class AbstractWoodpeckerAspect {
 
-    private SwanTransactionInterceptor swanTransactionInterceptor;
+    private SwanTransactionHandler swanTransactionHandler;
 
     /**
-     * Sets transaction interceptor.
-     *
+     * 切入处理入口
      * @param SwanTransactionInterceptor the  transaction interceptor
      */
-    protected void setSwanTransactionInterceptor(final SwanTransactionInterceptor swanTransactionInterceptor) {
-        this.swanTransactionInterceptor = swanTransactionInterceptor;
+    protected void setSwanTransactionInterceptor(final SwanTransactionHandler swanTransactionInterceptor) {
+        this.swanTransactionHandler = swanTransactionHandler;
     }
 
     /**
-     * this is point cut with  
+     * 切入点 
      */
-    @Pointcut("@annotation(org.zoo.swan.annotation.Swan)")
-    public void swanInterceptor() {
+    @Pointcut("@annotation(org.zoo.woodpecker.annotation.Woodpecker)")
+    public void woodpeckerInterceptor() {
     }
 
     /**
-     * this is around in {linkplain org.zoo.swan.annotation.Swan }.
-     *
+     * 环绕通知
      * @param proceedingJoinPoint proceedingJoinPoint
      * @return Object object
      * @throws Throwable Throwable
      */
-    @Around("swanInterceptor()")
+    @Around("woodpeckerInterceptor()")
     public Object interceptMethod(final ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
-        return swanTransactionInterceptor.interceptor(proceedingJoinPoint);
-    }
-
-    /**
-     * spring Order.
-     *
-     * @return int order
-     */
-    public abstract int getOrder();
+        return swanTransactionHandler.handler(proceedingJoinPoint);
+    } 
 }

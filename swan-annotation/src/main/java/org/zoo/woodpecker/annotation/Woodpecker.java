@@ -44,7 +44,7 @@ public @interface Woodpecker {
     Class<?>[] selfCheck() default {};
 	
     /**
-     * 交易异常提示语
+     * 异常提示语
      * @return the string
      */
     String errorMsg() default "字段异常";

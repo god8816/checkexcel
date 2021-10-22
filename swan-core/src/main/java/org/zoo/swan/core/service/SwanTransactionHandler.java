@@ -15,29 +15,24 @@
  * limitations under the License.
  */
 
-package org.zoo.woodpecker.core.interceptor;
+package org.zoo.swan.core.service;
 
-import org.aspectj.lang.annotation.Aspect;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.Ordered;
-import org.springframework.stereotype.Component;
+import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
- * SpringCloudSwanTransactionAspect.
- *
+ * swanTransactionHandler.
  * @author dzc
  */
-@Aspect
-@Component
-public class SpringCloudSwanTransactionAspect extends AbstractSwanTransactionAspect implements Ordered {
+@FunctionalInterface
+public interface SwanTransactionHandler {
 
-    @Autowired
-    public SpringCloudSwanTransactionAspect(final SwanTransactionInterceptorImpl swanTransactionInterceptorImpl) {
-        this.setSwanTransactionInterceptor(swanTransactionInterceptorImpl);
-    }
-
-    @Override
-    public int getOrder() {
-        return Ordered.HIGHEST_PRECEDENCE;
-    }
+    /**
+     * aop handler.
+     *
+     * @param point                 point
+     * @param swanTransactionContext transaction context
+     * @return Object
+     * @throws Throwable e
+     */
+    Object handler(ProceedingJoinPoint point) throws Throwable;
 }
