@@ -1,2 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.zoo.swan.spring.boot.starter.configuration.SwanAutoConfiguration
