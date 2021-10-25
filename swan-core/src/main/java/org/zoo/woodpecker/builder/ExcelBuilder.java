@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.zoo.woodpecker.annotation.CheckType;
 import org.zoo.woodpecker.annotation.Woodpecker;
+import org.zoo.woodpecker.handler.ExcelCheckServer;
+import org.zoo.woodpecker.handler.impl.PhoneCheckServerImpl;
 import org.zoo.woodpecker.util.ClassUtils;
 import org.zoo.woodpecker.util.ClassUtils.FieldCache;
 /**
@@ -31,7 +33,7 @@ public class ExcelBuilder {
 			for (FieldCache fieldCache : fieldCacheList) {
 				Woodpecker woodpecker = fieldCache.getField().getAnnotation(Woodpecker.class);
 				CheckType checkType = woodpecker.commonCheck();
-				recordCheck(rightRecordList,o,checkType);
+				recordCheck(rightRecordList,o,fieldCache,checkType,true);
 			}
 		}
 		return (List<T>) rightRecordList;
@@ -45,7 +47,7 @@ public class ExcelBuilder {
 			for (FieldCache fieldCache : fieldCacheList) {
 				Woodpecker woodpecker = fieldCache.getField().getAnnotation(Woodpecker.class);
 				CheckType checkType = woodpecker.commonCheck();
-				recordCheck(errorRecordList,o,checkType);
+				recordCheck(errorRecordList,o,fieldCache,checkType,false);
 			}
 		}
 		return (List<T>) errorRecordList;
@@ -55,12 +57,13 @@ public class ExcelBuilder {
 	 * 字段检查
 	 * */
 	@SuppressWarnings("unchecked")
-	private <T>  void recordCheck(List<T> rightRecordList,Object o,CheckType checkType) {
+	private <T>  void recordCheck(List<T> rightRecordList,Object o,FieldCache fieldCache,CheckType checkType,boolean statusRecord) {
+		boolean status = true;
 		//手机号校验
 		if(checkType.equals(CheckType.phone)) {
-			if(true) {
-				rightRecordList.add((T)o);
-				//TODO
+			ExcelCheckServer excelCheckServer = new PhoneCheckServerImpl();
+			if(statusRecord == excelCheckServer.doCheck(fieldCache)) {
+				excelCheckServer.printRecord(o);
 			}
 		}
 		

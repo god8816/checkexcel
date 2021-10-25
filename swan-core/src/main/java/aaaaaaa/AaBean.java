@@ -2,13 +2,18 @@ package aaaaaaa;
 
 import org.zoo.woodpecker.annotation.CheckType;
 import org.zoo.woodpecker.annotation.Woodpecker;
+import org.zoo.woodpecker.bean.ExcelImportBean;
 
 import lombok.Data;
 
 @Data
-public class AaBean {
+public class AaBean extends ExcelImportBean{
 
-  @Woodpecker(commonCheck = CheckType.phone, errorMsg="名字")
+  /**/
+  private static final long serialVersionUID = 1L;
+	
+
+@Woodpecker(commonCheck = CheckType.phone, errorMsg="名字")
   private String name;
   
   @Woodpecker(commonCheck = CheckType.phone, errorMsg="年纪")
