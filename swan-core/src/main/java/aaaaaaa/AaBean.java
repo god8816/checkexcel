@@ -13,7 +13,7 @@ public class AaBean extends ExcelImportBean{
   private static final long serialVersionUID = 1L;
 	
 
-@Woodpecker(commonCheck = CheckType.phone, errorMsg="名字")
+  @Woodpecker(commonCheck = CheckType.phone, errorMsg="名字")
   private String name;
   
   @Woodpecker(commonCheck = CheckType.phone, errorMsg="年纪")
