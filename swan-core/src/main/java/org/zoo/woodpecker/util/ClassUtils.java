@@ -82,7 +82,7 @@ public class ClassUtils {
             //获取历史错误提示
             String errorMassge = (String)errorInfo.get(obj);
             Woodpecker woodpecker = fieldCache.getField().getAnnotation(Woodpecker.class);
-            String newErrorMassge = new StringBuilder(errorMassge).append(";").append(woodpecker.errorMsg()).append(";").toString();
+            String newErrorMassge = new StringBuilder(errorMassge!=""?errorMassge+";":"").append(woodpecker.errorMsg()).append(";").toString();
 			errorInfo.set(obj,newErrorMassge );
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -28,16 +28,16 @@ public class ExcelBuilder {
 
 	public <T> List<T> doRightRecord() {
 		List<T> rightRecordList = new ArrayList<T>();
-		
+		List<Woodpecker> woodpeckerList = new ArrayList<>();
 		for (Object o : list) {
 			List<FieldCache> fieldCacheList = ClassUtils.declaredFields(o);
 			for (FieldCache fieldCache : fieldCacheList) {
 				Woodpecker woodpecker = fieldCache.getField().getAnnotation(Woodpecker.class);
 				if(Objects.nonNull(woodpecker)) {
-					CheckType checkType = woodpecker.commonCheck();
-					recordCheck(rightRecordList,o,fieldCacheList,false);
+					woodpeckerList.add(woodpecker);
 				}
 			}
+			recordCheck(rightRecordList,o,fieldCacheList,false);
 		}
 		return (List<T>) rightRecordList;
 	}
@@ -45,9 +45,9 @@ public class ExcelBuilder {
  
 	public <T> List<T> doErrorRecord() {
 		List<T> errorRecordList = new ArrayList<T>();
+		List<Woodpecker> woodpeckerList = new ArrayList<>();
 		for (Object o : list) {
 			List<FieldCache> fieldCacheList = ClassUtils.declaredFields(o);
-			List<Woodpecker> woodpeckerList = new ArrayList<>();
 			for (FieldCache fieldCache : fieldCacheList) {
 				Woodpecker woodpecker = fieldCache.getField().getAnnotation(Woodpecker.class);
 				if(Objects.nonNull(woodpecker)) {

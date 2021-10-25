@@ -11,7 +11,7 @@ public class Test {
 		// TODO Auto-generated method stub
 		
 		List<AaBean> listExcel = new ArrayList<AaBean>();
-		for (int i=0;i<1;i++) {
+		for (int i=0;i<100;i++) {
 			AaBean e = new AaBean();
 			e.setName("名字_"+i);
 			e.setPhone("13193873308");
