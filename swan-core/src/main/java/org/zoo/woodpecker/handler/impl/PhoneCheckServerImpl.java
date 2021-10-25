@@ -1,18 +1,27 @@
 package org.zoo.woodpecker.handler.impl;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.zoo.woodpecker.handler.ExcelCheckServer;
 import org.zoo.woodpecker.util.ClassUtils.FieldCache;
+import org.zoo.woodpecker.util.StringUtil;
 
 
 /**
  * 手机号校验
  * @author dzc
- * @since 2021-09-22
  */
 public class PhoneCheckServerImpl extends ExcelCheckServer{
 
 	public Boolean doCheck(FieldCache fieldCache) {
-		// TODO Auto-generated method stub
-		return false;
+		String phone = StringUtil.toString(fieldCache.getValue());
+		if(StringUtil.isEmpty(phone)) {
+			return false;
+		}
+		Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
+		Matcher m = p.matcher(phone); 
+		Boolean status =  m.matches();
+		return status;
 	}
 
 	 

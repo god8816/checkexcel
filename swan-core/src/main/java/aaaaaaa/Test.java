@@ -13,7 +13,7 @@ public class Test {
 		List<AaBean> listExcel = new ArrayList<AaBean>();
 		for (int i=0;i<10;i++) {
 			AaBean e = new AaBean();
-			e.setName(i+"");
+			e.setName("13193873308");
 			e.setAge(i+"");
 			e.setXg(i+"");
 			listExcel.add(e);
