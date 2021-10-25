@@ -28,7 +28,7 @@ import java.lang.annotation.Target;
  * @author dzc
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD})
+@Target({ElementType.FIELD})
 public @interface Woodpecker {
 
 	/**

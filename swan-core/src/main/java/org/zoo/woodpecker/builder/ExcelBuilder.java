@@ -2,6 +2,8 @@ package org.zoo.woodpecker.builder;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.zoo.woodpecker.util.ClassUtils;
 /**
  * @author dzc
  */
@@ -20,6 +22,7 @@ public class ExcelBuilder {
  
 	public <T> List<T> doRightRecord() {
 		// TODO Auto-generated method stub
+		ClassUtils.declaredFields(clazz);
 		return (List<T>) list;
 	}
 
