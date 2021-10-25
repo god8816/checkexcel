@@ -56,7 +56,7 @@ public class ClassUtils {
     /**
      * Field缓存
      * */
-    private static class FieldCache {
+    public static class FieldCache {
     	
         private final Map<String, Field> fieldMap;
 
