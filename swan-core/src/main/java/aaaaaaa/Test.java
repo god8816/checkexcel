@@ -13,9 +13,8 @@ public class Test {
 		List<AaBean> listExcel = new ArrayList<AaBean>();
 		for (int i=0;i<10;i++) {
 			AaBean e = new AaBean();
-			e.setName("13193873308");
-			e.setAge(i+"");
-			e.setXg(i+"");
+			e.setName("名字_"+i);
+			e.setPhone("13193873308");
 			listExcel.add(e);
 		}
 		
