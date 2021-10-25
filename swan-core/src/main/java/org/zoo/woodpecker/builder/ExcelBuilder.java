@@ -3,6 +3,7 @@ package org.zoo.woodpecker.builder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import org.zoo.woodpecker.annotation.CheckType;
 import org.zoo.woodpecker.annotation.Woodpecker;
@@ -65,16 +66,18 @@ public class ExcelBuilder {
 	 * 字段检查
 	 * */
 	@SuppressWarnings("unchecked")
-	private <T>  void recordCheck(List<T> rightRecordList,Object o,List<FieldCache> fieldCacheList,boolean statusRecord) {
-		boolean status = true;
+	private <T>  void recordCheck(List<T> rightRecordList,Object o,List<FieldCache> fieldCacheList,boolean statusRecord) { 
 		//手机号校验
-		FieldCache fieldCachePhone = fieldCacheList.stream().filter(x->CheckType.phone.equals(x.getCheckType())).findFirst().get();
-		if(Objects.nonNull(fieldCachePhone)) {
-			ExcelCheckServer excelCheckServer = new PhoneCheckServerImpl();
-			if(statusRecord == excelCheckServer.doCheck(fieldCachePhone) == false) {
-				excelCheckServer.printRecord(o,fieldCachePhone);
+		List<FieldCache> fieldCachePhoneList = fieldCacheList.stream().filter(x->CheckType.phone.equals(x.getCheckType())).collect(Collectors.toList());
+		for (FieldCache fieldCachePhone : fieldCachePhoneList) {
+			if(Objects.nonNull(fieldCachePhone)) {
+				ExcelCheckServer excelCheckServer = new PhoneCheckServerImpl();
+				if(statusRecord == excelCheckServer.doCheck(fieldCachePhone) == false) {
+					excelCheckServer.printRecord(o,fieldCachePhone);
+				}
 			}
 		}
+
 		
 		rightRecordList.add((T)o);
 	}

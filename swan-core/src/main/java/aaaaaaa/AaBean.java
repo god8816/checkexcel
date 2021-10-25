@@ -18,8 +18,11 @@ public class AaBean extends ExcelPrentBean{
   @Woodpecker(commonCheck = CheckType.cn, errorMsg="名字不是中文")
   private String name;
   
-  @Woodpecker(commonCheck = CheckType.phone, errorMsg="手机号格式异常")
-  private String phone;
+  @Woodpecker(commonCheck = CheckType.phone, errorMsg="手机号格式异常1")
+  private String phone1;
+  
+  @Woodpecker(commonCheck = CheckType.phone, errorMsg="手机号格式异常2")
+  private String phone2;
   
   @Woodpecker(commonCheck = CheckType.number, errorMsg="年纪不是数字")
   private Integer age;

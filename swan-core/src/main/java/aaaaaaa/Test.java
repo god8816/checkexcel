@@ -11,14 +11,15 @@ public class Test {
 		// TODO Auto-generated method stub
 		
 		List<AaBean> listExcel = new ArrayList<AaBean>();
-		for (int i=0;i<100;i++) {
+		for (int i=0;i<2;i++) {
 			AaBean e = new AaBean();
 			e.setName("名字_"+i);
-			e.setPhone("13193873308");
+			e.setPhone1("13193873308");
+			e.setPhone2("13193873308");
 			listExcel.add(e);
 		}
 		
-		//List<AaBean> listError = ExcelCheck.list(listExcel, AaBean.class).doErrorRecord();
+		List<AaBean> listError = ExcelCheck.list(listExcel, AaBean.class).doErrorRecord();
 		
 		List<AaBean> listRight = ExcelCheck.list(listExcel, AaBean.class).doRightRecord();
 		

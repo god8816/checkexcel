@@ -5,14 +5,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.zoo.woodpecker.annotation.CheckType;
 import org.zoo.woodpecker.annotation.Woodpecker;
-
 import com.alibaba.fastjson.JSON;
-
 import lombok.Data;
 
 /**
@@ -80,9 +77,9 @@ public class ClassUtils {
             Field errorInfo = obj.getClass().getSuperclass().getDeclaredField("errorInfo");
             errorInfo.setAccessible(true);
             //获取历史错误提示
-            String errorMassge = (String)errorInfo.get(obj);
+            String errorMassge = StringUtil.toString(errorInfo.get(obj));
             Woodpecker woodpecker = fieldCache.getField().getAnnotation(Woodpecker.class);
-            String newErrorMassge = new StringBuilder(errorMassge!=""?errorMassge+";":"").append(woodpecker.errorMsg()).append(";").toString();
+            String newErrorMassge = new StringBuilder(errorMassge).append(woodpecker.errorMsg()).append(";").toString();
 			errorInfo.set(obj,newErrorMassge );
 		} catch (Exception e) {
 			e.printStackTrace();
