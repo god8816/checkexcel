@@ -4,11 +4,9 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.zoo.woodpecker.annotation.Woodpecker;
 
 import com.alibaba.fastjson.JSON;
 
@@ -60,6 +58,31 @@ public class ClassUtils {
 			e.printStackTrace();
 			LOGGER.error("获取字段信息异常，异常信息："+ JSON.toJSONString(e));
 		} 
+    }
+    
+    /**
+     * 写入异常字段提示语
+     * */
+    public static Object writeErrorInfoField(Object obj,FieldCache fieldCache) {
+    	Class<?> clazz = obj.getClass();
+        if (clazz == null) {
+            return null;
+        }
+        
+        try {
+            Field errorInfo = obj.getClass().getSuperclass().getDeclaredField("errorInfo");
+            errorInfo.setAccessible(true);
+            //获取历史错误提示
+            String errorMassge = (String)errorInfo.get(obj);
+            Woodpecker woodpecker = fieldCache.getField().getAnnotation(Woodpecker.class);
+            String newErrorMassge = new StringBuilder(errorMassge).append(";").append(woodpecker.errorMsg()).append(";").toString();
+			errorInfo.set(obj,newErrorMassge );
+		} catch (Exception e) {
+			e.printStackTrace();
+			LOGGER.error("写入错误提示异常，异常信息："+ JSON.toJSONString(e));
+		} 
+         
+        return obj;
     }
     
     /**

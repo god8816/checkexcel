@@ -1,5 +1,6 @@
 package org.zoo.woodpecker.handler;
 
+import org.zoo.woodpecker.util.ClassUtils;
 import org.zoo.woodpecker.util.ClassUtils.FieldCache;
 
 /**
@@ -20,7 +21,6 @@ public abstract class ExcelCheckServer {
 	 * @param fieldCache 
 	 * */
 	public void printRecord(Object o, FieldCache fieldCache) {
-		// TODO Auto-generated method stub
-		
+		ClassUtils.writeErrorInfoField(o, fieldCache);
 	}
 }

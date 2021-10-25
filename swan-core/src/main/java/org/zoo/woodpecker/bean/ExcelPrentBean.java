@@ -1,20 +1,17 @@
 package org.zoo.woodpecker.bean;
 
 import com.alibaba.excel.annotation.ExcelIgnore;
-import com.alibaba.fastjson.annotation.JSONField;
-import com.alibaba.fastjson.serializer.SerializerFeature;
 
 import lombok.*;
 import java.io.Serializable;
 
 /**
  * @author dzc
- * @date 2020-08-26
  * @description excel导入提示类
  **/
 @Getter
 @Setter
-public class ExcelImportBean implements Serializable{
+public class ExcelPrentBean implements Serializable{
 	
 	/**
 	 * 
@@ -24,6 +21,6 @@ public class ExcelImportBean implements Serializable{
 	
 	//异常原因
 	@ExcelIgnore
-	private String errorInfo;
+	private String errorInfo = "";
 
 }

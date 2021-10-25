@@ -2,12 +2,12 @@ package aaaaaaa;
 
 import org.zoo.woodpecker.annotation.CheckType;
 import org.zoo.woodpecker.annotation.Woodpecker;
-import org.zoo.woodpecker.bean.ExcelImportBean;
+import org.zoo.woodpecker.bean.ExcelPrentBean;
 
 import lombok.Data;
 
 @Data
-public class AaBean extends ExcelImportBean{
+public class AaBean extends ExcelPrentBean{
 
   /**/
   private static final long serialVersionUID = 1L;
