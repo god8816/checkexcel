@@ -35,7 +35,7 @@ public @interface Woodpecker {
      * 公共校验 校验类型：CheckType
      * @return the string
      */
-	String commonCheck() default "";
+	CheckType commonCheck();
 	
 	/**
      * 自定义类校验

@@ -3,6 +3,8 @@ package org.zoo.woodpecker.builder;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.zoo.woodpecker.annotation.CheckType;
+import org.zoo.woodpecker.annotation.Woodpecker;
 import org.zoo.woodpecker.util.ClassUtils;
 import org.zoo.woodpecker.util.ClassUtils.FieldCache;
 /**
@@ -12,31 +14,140 @@ public class ExcelBuilder {
 
 	private List<Object> list = new ArrayList<Object>();
 	
-	private FieldCache fieldCache;
-	
     private Class<?> clazz;
     
  
 	public ExcelBuilder list(List data, Class head) {
 		this.list = data;
 		this.clazz = head;
-		fieldCache = ClassUtils.declaredFields(clazz);
 		return this;
 	}
 
- 
 	public <T> List<T> doRightRecord() {
 		List<T> rightRecordList = new ArrayList<T>();
 		
-	
-		return (List<T>) list;
+		for (Object o : list) {
+			List<FieldCache> fieldCacheList = ClassUtils.declaredFields(o);
+			for (FieldCache fieldCache : fieldCacheList) {
+				Woodpecker woodpecker = fieldCache.getField().getAnnotation(Woodpecker.class);
+				CheckType checkType = woodpecker.commonCheck();
+				recordCheck(rightRecordList,o,checkType);
+			}
+		}
+		return (List<T>) rightRecordList;
 	}
 
  
 	public <T> List<T> doErrorRecord() {
-		List<T> rightRecordList = new ArrayList<T>();
-		return (List<T>) list;
+		List<T> errorRecordList = new ArrayList<T>();
+		for (Object o : list) {
+			List<FieldCache> fieldCacheList = ClassUtils.declaredFields(o);
+			for (FieldCache fieldCache : fieldCacheList) {
+				Woodpecker woodpecker = fieldCache.getField().getAnnotation(Woodpecker.class);
+				CheckType checkType = woodpecker.commonCheck();
+				recordCheck(errorRecordList,o,checkType);
+			}
+		}
+		return (List<T>) errorRecordList;
 	}
+	
+	/**
+	 * 字段检查
+	 * */
+	@SuppressWarnings("unchecked")
+	private <T>  void recordCheck(List<T> rightRecordList,Object o,CheckType checkType) {
+		//手机号校验
+		if(checkType.equals(CheckType.phone)) {
+			if(true) {
+				rightRecordList.add((T)o);
+				//TODO
+			}
+		}
+		
+		//身份证校验
+		if(checkType.equals(CheckType.idcard)) {
+			if(true) {
+				rightRecordList.add((T)o);
+				//TODO
+			}
+		} 
+		
+		//时间格式
+		if(checkType.equals(CheckType.timeFormat)) {
+			if(true) {
+				rightRecordList.add((T)o);
+				//TODO
+			}
+		} 
+		
+		//邮箱格式
+		if(checkType.equals(CheckType.email)) {
+			if(true) {
+				rightRecordList.add((T)o);
+				//TODO
+			}
+		} 
+		
+		//是否是数字格式
+		if(checkType.equals(CheckType.number)) {
+			if(true) {
+				rightRecordList.add((T)o);
+				//TODO
+			}
+		} 
+		
+		//是否是字母
+		if(checkType.equals(CheckType.en)) {
+			if(true) {
+				rightRecordList.add((T)o);
+				//TODO
+			}
+		} 
+		
+		//是否是中文
+		if(checkType.equals(CheckType.cn)) {
+			if(true) {
+				rightRecordList.add((T)o);
+				//TODO
+			}
+		} 
+		
+		//是否是省
+		if(checkType.equals(CheckType.province)) {
+			if(true) {
+				rightRecordList.add((T)o);
+				//TODO
+			}
+		} 
+		
+		//是否是市
+		if(checkType.equals(CheckType.city)) {
+			if(true) {
+				rightRecordList.add((T)o);
+				//TODO
+			}
+		} 
+		
+		//是否是市
+		if(checkType.equals(CheckType.area)) {
+			if(true) {
+				rightRecordList.add((T)o);
+				//TODO
+			}
+		} 
+		
+		//是否是街道
+		if(checkType.equals(CheckType.street)) {
+			if(true) {
+				rightRecordList.add((T)o);
+				//TODO
+			}
+		} 
+		
+		rightRecordList.add((T)o);
+	}
+	
+	
 	
 
 }

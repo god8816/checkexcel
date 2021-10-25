@@ -17,18 +17,32 @@
 
 package org.zoo.woodpecker.annotation;
 
-import lombok.Data;
-
 /**
  * 公共校验类型
  * @author dzc
  */
-@Data
-public class CheckType {
+public enum CheckType {
 	
-	/**
-     * 手机号校验
-     * @return the string
-     */
-	public static String phone = "";
+	 //手机号校验
+	 phone,
+	 //身份证校验
+	 idcard,
+	 //时间格式校验
+	 timeFormat,
+	 //邮箱校验
+	 email,
+	 //是否是数字
+	 number,
+	 //是否是字母
+	 en,
+	 //是否是中文
+	 cn,
+	 //省
+	 province,
+	 //市
+	 city,
+	 //区
+	 area,
+	 //街道
+	 street;
 }

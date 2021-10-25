@@ -14,6 +14,8 @@ public class Test {
 		for (int i=0;i<10;i++) {
 			AaBean e = new AaBean();
 			e.setName(i+"");
+			e.setAge(i+"");
+			e.setXg(i+"");
 			listExcel.add(e);
 		}
 		
