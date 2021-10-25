@@ -4,8 +4,11 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.zoo.woodpecker.annotation.CheckType;
 import org.zoo.woodpecker.annotation.Woodpecker;
 
 import com.alibaba.fastjson.JSON;
@@ -48,11 +51,15 @@ public class ClassUtils {
      * */
     private static void declaredOneField(Field field,Object obj,List<FieldCache> fieldList) {
     	try {
+    		 Woodpecker woodpecker = field.getAnnotation(Woodpecker.class);
 	       	 FieldCache fieldCache = new FieldCache();
 	       	 field.setAccessible(true);
 	       	 fieldCache.setField(field);
 	       	 fieldCache.setName(field.getName());
 	       	 fieldCache.setValue(field.get(obj));
+	       	 if(Objects.nonNull(woodpecker)) {
+	       		fieldCache.setCheckType(woodpecker.commonCheck());
+	       	 }
 	         fieldList.add(fieldCache);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -104,6 +111,11 @@ public class ClassUtils {
     	 * 字段value
     	 * */
         private Object value;
+        
+        /**
+         * 校验类型
+         * */
+        private CheckType checkType;
     }
 
 }

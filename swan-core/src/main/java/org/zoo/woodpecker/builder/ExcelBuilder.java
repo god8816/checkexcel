@@ -35,7 +35,7 @@ public class ExcelBuilder {
 				Woodpecker woodpecker = fieldCache.getField().getAnnotation(Woodpecker.class);
 				if(Objects.nonNull(woodpecker)) {
 					CheckType checkType = woodpecker.commonCheck();
-					recordCheck(rightRecordList,o,fieldCache,checkType,true);
+					recordCheck(rightRecordList,o,fieldCacheList,false);
 				}
 			}
 		}
@@ -47,28 +47,32 @@ public class ExcelBuilder {
 		List<T> errorRecordList = new ArrayList<T>();
 		for (Object o : list) {
 			List<FieldCache> fieldCacheList = ClassUtils.declaredFields(o);
+			List<Woodpecker> woodpeckerList = new ArrayList<>();
 			for (FieldCache fieldCache : fieldCacheList) {
 				Woodpecker woodpecker = fieldCache.getField().getAnnotation(Woodpecker.class);
 				if(Objects.nonNull(woodpecker)) {
-					CheckType checkType = woodpecker.commonCheck();
-					recordCheck(errorRecordList,o,fieldCache,checkType,false);
+					woodpeckerList.add(woodpecker);
 				}
 			}
+			recordCheck(errorRecordList,o,fieldCacheList,false);
 		}
 		return (List<T>) errorRecordList;
 	}
 	
+	
+
 	/**
 	 * 字段检查
 	 * */
 	@SuppressWarnings("unchecked")
-	private <T>  void recordCheck(List<T> rightRecordList,Object o,FieldCache fieldCache,CheckType checkType,boolean statusRecord) {
+	private <T>  void recordCheck(List<T> rightRecordList,Object o,List<FieldCache> fieldCacheList,boolean statusRecord) {
 		boolean status = true;
 		//手机号校验
-		if(checkType.equals(CheckType.phone)) {
+		FieldCache fieldCachePhone = fieldCacheList.stream().filter(x->CheckType.phone.equals(x.getCheckType())).findFirst().get();
+		if(Objects.nonNull(fieldCachePhone)) {
 			ExcelCheckServer excelCheckServer = new PhoneCheckServerImpl();
-			if(statusRecord == excelCheckServer.doCheck(fieldCache) == false) {
-				excelCheckServer.printRecord(o,fieldCache);
+			if(statusRecord == excelCheckServer.doCheck(fieldCachePhone) == false) {
+				excelCheckServer.printRecord(o,fieldCachePhone);
 			}
 		}
 		
