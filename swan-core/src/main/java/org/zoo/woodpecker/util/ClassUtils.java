@@ -81,11 +81,16 @@ public class ClassUtils {
             Woodpecker woodpecker = fieldCache.getField().getAnnotation(Woodpecker.class);
             String newErrorMassge = new StringBuilder(errorMassge).append(woodpecker.errorMsg()).append(";").toString();
 			errorInfo.set(obj,newErrorMassge );
-		} catch (Exception e) {
+		} catch (NoSuchFieldException e) {
 			e.printStackTrace();
-			LOGGER.error("写入错误提示异常，异常信息："+ JSON.toJSONString(e));
+			LOGGER.error("未继承ExcelPrentBean。");
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+			LOGGER.error("反射参数获取。");
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+			LOGGER.error("反射写权限异常。");
 		} 
-         
         return obj;
     }
     

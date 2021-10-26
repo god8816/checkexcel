@@ -7,30 +7,32 @@ import java.util.stream.Collectors;
 
 import org.zoo.woodpecker.annotation.CheckType;
 import org.zoo.woodpecker.annotation.Woodpecker;
+import org.zoo.woodpecker.bean.ExcelPrentBean;
 import org.zoo.woodpecker.handler.ExcelCheckServer;
 import org.zoo.woodpecker.handler.impl.PhoneCheckServerImpl;
 import org.zoo.woodpecker.util.ClassUtils;
 import org.zoo.woodpecker.util.ClassUtils.FieldCache;
+import org.zoo.woodpecker.util.StringUtil;
 /**
  * @author dzc
+ * @param <T>
  */
-public class ExcelBuilder {
+public class ExcelBuilder<T> {
 
-	private List<Object> list = new ArrayList<Object>();
-	
-    private Class<?> clazz;
     
+    private List<Object> rightRecordList = new ArrayList<Object>();
+	
+    private List<Object> errorRecordList = new ArrayList<Object>();
+	
  
-	public ExcelBuilder list(List data, Class head) {
-		this.list = data;
-		this.clazz = head;
+	public ExcelBuilder list(List dataList, Class className) {
+		doRecord(dataList);
 		return this;
 	}
-
-	public <T> List<T> doRightRecord() {
-		List<T> rightRecordList = new ArrayList<T>();
+	
+	private void doRecord(List<Object> dataList) {
 		List<Woodpecker> woodpeckerList = new ArrayList<>();
-		for (Object o : list) {
+		for (Object o : dataList) {
 			List<FieldCache> fieldCacheList = ClassUtils.declaredFields(o);
 			for (FieldCache fieldCache : fieldCacheList) {
 				Woodpecker woodpecker = fieldCache.getField().getAnnotation(Woodpecker.class);
@@ -38,25 +40,25 @@ public class ExcelBuilder {
 					woodpeckerList.add(woodpecker);
 				}
 			}
-			recordCheck(rightRecordList,o,fieldCacheList,false);
+			
+			//记录是否正确校验
+			Object obj = recordCheck(o,fieldCacheList);
+			ExcelPrentBean excelBean = (ExcelPrentBean)o;
+			if(StringUtil.isEmpty(excelBean.getErrorInfo())) {
+				rightRecordList.add(obj);
+			}else {
+				errorRecordList.add(obj);
+			}
 		}
+	}
+	
+
+	public List<T> doRightRecord() {
 		return (List<T>) rightRecordList;
 	}
 
  
-	public <T> List<T> doErrorRecord() {
-		List<T> errorRecordList = new ArrayList<T>();
-		List<Woodpecker> woodpeckerList = new ArrayList<>();
-		for (Object o : list) {
-			List<FieldCache> fieldCacheList = ClassUtils.declaredFields(o);
-			for (FieldCache fieldCache : fieldCacheList) {
-				Woodpecker woodpecker = fieldCache.getField().getAnnotation(Woodpecker.class);
-				if(Objects.nonNull(woodpecker)) {
-					woodpeckerList.add(woodpecker);
-				}
-			}
-			recordCheck(errorRecordList,o,fieldCacheList,false);
-		}
+	public List<T> doErrorRecord() {
 		return (List<T>) errorRecordList;
 	}
 	
@@ -64,22 +66,20 @@ public class ExcelBuilder {
 
 	/**
 	 * 字段检查
+	 * @return 
 	 * */
-	@SuppressWarnings("unchecked")
-	private <T>  void recordCheck(List<T> rightRecordList,Object o,List<FieldCache> fieldCacheList,boolean statusRecord) { 
+	private Object recordCheck(Object o,List<FieldCache> fieldCacheList) { 
 		//手机号校验
 		List<FieldCache> fieldCachePhoneList = fieldCacheList.stream().filter(x->CheckType.phone.equals(x.getCheckType())).collect(Collectors.toList());
 		for (FieldCache fieldCachePhone : fieldCachePhoneList) {
 			if(Objects.nonNull(fieldCachePhone)) {
 				ExcelCheckServer excelCheckServer = new PhoneCheckServerImpl();
-				if(statusRecord == excelCheckServer.doCheck(fieldCachePhone) == false) {
+				if(excelCheckServer.doCheck(fieldCachePhone) == false) {
 					excelCheckServer.printRecord(o,fieldCachePhone);
 				}
 			}
 		}
-
-		
-		rightRecordList.add((T)o);
+		return o;
 	}
 	
 	

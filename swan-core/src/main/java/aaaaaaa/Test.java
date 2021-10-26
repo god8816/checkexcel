@@ -14,8 +14,8 @@ public class Test {
 		for (int i=0;i<2;i++) {
 			AaBean e = new AaBean();
 			e.setName("名字_"+i);
-			e.setPhone1("13193873308");
-			e.setPhone2("13193873308");
+			e.setPhone1("13193873308@");
+			e.setPhone2("13193873308@");
 			listExcel.add(e);
 		}
 		
