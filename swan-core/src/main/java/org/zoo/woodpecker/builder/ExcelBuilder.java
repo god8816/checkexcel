@@ -101,13 +101,13 @@ public class ExcelBuilder<T> {
 				}
 			}
 			
-			//........
+			// TODO 待完成其他场景 ........
 			
 			
 		   //自定义校验
-		   WoodpeckerReflector.execute(o,fieldCache);
-		   
-			
+		   if(!WoodpeckerReflector.execute(o,fieldCache)) {
+				ClassUtils.writeErrorInfoField(o, fieldCache);
+		   }
 		}
 		return o;
 	}
