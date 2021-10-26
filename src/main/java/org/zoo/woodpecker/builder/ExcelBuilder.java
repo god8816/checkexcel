@@ -8,6 +8,7 @@ import org.zoo.woodpecker.annotation.Woodpecker;
 import org.zoo.woodpecker.bean.ExcelPrentBean;
 import org.zoo.woodpecker.exception.WoodpeckerRuntimeException;
 import org.zoo.woodpecker.handler.ExcelCheckServer;
+import org.zoo.woodpecker.handler.impl.IdCardCheckServerImpl;
 import org.zoo.woodpecker.handler.impl.PhoneCheckServerImpl;
 import org.zoo.woodpecker.util.ClassUtils;
 import org.zoo.woodpecker.util.ClassUtils.FieldCache;
@@ -96,6 +97,14 @@ public class ExcelBuilder<T> {
 			//手机号校验
 			if(CheckType.phone.equals(fieldCache.getCheckType())) {
 				ExcelCheckServer excelCheckServer = new PhoneCheckServerImpl();
+				if(excelCheckServer.doCheck(fieldCache) == false) {
+					excelCheckServer.printRecord(o,fieldCache);
+				}
+			}
+			
+			//身份证号校验
+			if(CheckType.idcard.equals(fieldCache.getCheckType())) {
+				ExcelCheckServer excelCheckServer = new IdCardCheckServerImpl();
 				if(excelCheckServer.doCheck(fieldCache) == false) {
 					excelCheckServer.printRecord(o,fieldCache);
 				}
