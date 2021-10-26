@@ -22,6 +22,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import org.zoo.woodpecker.util.StringUtil;
+
 
 /**
  * 校验字段标记
@@ -41,7 +43,7 @@ public @interface Woodpecker {
      * 自定义类校验
      * @return the string
      */
-    Class<?>[] selfCheckClassName() default {};
+    Class<?> selfCheckClassName() default StringUtil.class;
     
 	/**
      * 自定义类校验方法名称

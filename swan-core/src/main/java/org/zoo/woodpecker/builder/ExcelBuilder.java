@@ -1,12 +1,8 @@
 package org.zoo.woodpecker.builder;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
-
-import org.apache.commons.collections4.CollectionUtils;
 import org.zoo.woodpecker.annotation.CheckType;
 import org.zoo.woodpecker.annotation.Woodpecker;
 import org.zoo.woodpecker.bean.ExcelPrentBean;
@@ -16,6 +12,7 @@ import org.zoo.woodpecker.handler.impl.PhoneCheckServerImpl;
 import org.zoo.woodpecker.util.ClassUtils;
 import org.zoo.woodpecker.util.ClassUtils.FieldCache;
 import org.zoo.woodpecker.util.StringUtil;
+import org.zoo.woodpecker.util.WoodpeckerReflector;
 /**
  * @author dzc
  * @param excel处理
@@ -60,12 +57,9 @@ public class ExcelBuilder<T> {
 			for (FieldCache fieldCache : fieldCacheList) {
 				Woodpecker woodpecker = fieldCache.getField().getAnnotation(Woodpecker.class);
 				if(Objects.nonNull(woodpecker)) {
-					if(woodpecker.selfCheckClassName().length>0 && StringUtil.isEmpty(woodpecker.selfCheckMethodName()) ) {
+					if(!woodpecker.selfCheckClassName().equals(StringUtil.class) && StringUtil.isEmpty(woodpecker.selfCheckMethodName()) ) {
 						throw new WoodpeckerRuntimeException("selfCheckMethodName和selfCheckClassName只能同时存在");
-					}
-					if(woodpecker.selfCheckClassName().length==0 && StringUtil.isNotEmpty(woodpecker.selfCheckMethodName()) ) {
-						throw new WoodpeckerRuntimeException("selfCheckMethodName和selfCheckClassName只能同时存在");					
-					}
+					} 
 					woodpeckerList.add(woodpecker);
 				}
 			}
@@ -110,7 +104,9 @@ public class ExcelBuilder<T> {
 			//........
 			
 			
-			
+		   //自定义校验
+		   WoodpeckerReflector.execute(o,fieldCache);
+		   
 			
 		}
 		return o;
