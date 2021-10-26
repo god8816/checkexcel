@@ -23,9 +23,9 @@ package org.zoo.woodpecker.annotation;
  */
 public enum CheckType {
 	
-	 //手机号校验
+	 //手机号格式校验
 	 phone,
-	 //身份证校验
+	 //身份证格式校验
 	 idcard,
 	 //时间格式校验
 	 timeFormat,
