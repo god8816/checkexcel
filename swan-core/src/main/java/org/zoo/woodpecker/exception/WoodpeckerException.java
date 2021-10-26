@@ -15,43 +15,36 @@
  * limitations under the License.
  */
 
-package org.zoo.woodpecker.annotation;
+package org.zoo.woodpecker.exception;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
+import lombok.Getter;
+import lombok.Setter;
 
 /**
- * 校验字段标记
+ * SwanException.
+ *
  * @author dzc
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.FIELD})
-public @interface Woodpecker {
+@Getter
+@Setter
+public class WoodpeckerException  {
 
-	/**
-     * 公共校验 校验类型：CheckType
-     * @return the string
-     */
-	CheckType commonCheck();
-	
-	/**
-     * 自定义类校验
-     * @return the string
-     */
-    Class<?>[] selfCheckClassName() default {};
+    private static final long serialVersionUID = -948934144333391208L;
     
-	/**
-     * 自定义类校验方法名称
-     * @return the string
-     */
-    String selfCheckMethodName() default "";
-	
-    /**
-     * 异常提示语
-     * @return the string
-     */
-    String errorMsg() default "字段异常";
+    private Integer code = 200;
+    
+    private String msg;
+
+ 
+    public WoodpeckerException() {
+    }
+
+    public WoodpeckerException(final String msg) {
+        this.msg = msg;
+    }
+ 
+    public WoodpeckerException(final Integer code ,final String msg) {
+        this.code = code;
+        this.msg = msg;
+    }
 }

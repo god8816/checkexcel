@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.zoo.woodpecker.annotation.CheckType;
 import org.zoo.woodpecker.annotation.Woodpecker;
 import org.zoo.woodpecker.bean.ExcelPrentBean;
+import org.zoo.woodpecker.exception.WoodpeckerRuntimeException;
 import org.zoo.woodpecker.handler.ExcelCheckServer;
 import org.zoo.woodpecker.handler.impl.PhoneCheckServerImpl;
 import org.zoo.woodpecker.util.ClassUtils;
@@ -57,6 +58,12 @@ public class ExcelBuilder<T> {
 			for (FieldCache fieldCache : fieldCacheList) {
 				Woodpecker woodpecker = fieldCache.getField().getAnnotation(Woodpecker.class);
 				if(Objects.nonNull(woodpecker)) {
+					if(Objects.nonNull(woodpecker.selfCheckClassName()) && StringUtil.isEmpty(woodpecker.selfCheckMethodName()) ) {
+						throw new WoodpeckerRuntimeException("selfCheckMethodName和selfCheckClassName只能同时存在");
+					}
+					if(Objects.isNull(woodpecker.selfCheckClassName()) && StringUtil.isNotEmpty(woodpecker.selfCheckMethodName()) ) {
+						throw new WoodpeckerRuntimeException("selfCheckMethodName和selfCheckClassName只能同时存在");					
+					}
 					woodpeckerList.add(woodpecker);
 				}
 			}
@@ -99,6 +106,8 @@ public class ExcelBuilder<T> {
 				}
 			}
 		}
+		
+		
 		return o;
 	}
 	

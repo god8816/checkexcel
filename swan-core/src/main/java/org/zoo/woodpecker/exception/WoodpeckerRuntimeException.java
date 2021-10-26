@@ -15,43 +15,42 @@
  * limitations under the License.
  */
 
-package org.zoo.woodpecker.annotation;
-
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
+package org.zoo.woodpecker.exception;
 
 /**
- * 校验字段标记
+ * 公共异常
  * @author dzc
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.FIELD})
-public @interface Woodpecker {
+public class WoodpeckerRuntimeException extends RuntimeException {
 
-	/**
-     * 公共校验 校验类型：CheckType
-     * @return the string
-     */
-	CheckType commonCheck();
-	
-	/**
-     * 自定义类校验
-     * @return the string
-     */
-    Class<?>[] selfCheckClassName() default {};
-    
-	/**
-     * 自定义类校验方法名称
-     * @return the string
-     */
-    String selfCheckMethodName() default "";
-	
+    private static final long serialVersionUID = -1949770547060521702L;
+
+
+    public WoodpeckerRuntimeException() {
+    }
+
     /**
-     * 异常提示语
-     * @return the string
+     *
+     * @param message the message
      */
-    String errorMsg() default "字段异常";
+    public WoodpeckerRuntimeException(final String message) {
+        super(message);
+    }
+
+    /**
+     *
+     * @param message the message
+     * @param cause   the cause
+     */
+    public WoodpeckerRuntimeException(final String message, final Throwable cause) {
+        super(message, cause);
+    }
+
+    /**
+     *
+     * @param cause the cause
+     */
+    public WoodpeckerRuntimeException(final Throwable cause) {
+        super(cause);
+    }
 }
