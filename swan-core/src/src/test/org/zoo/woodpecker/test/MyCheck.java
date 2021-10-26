@@ -1,4 +1,4 @@
-package aaaaaaa;
+package org.zoo.woodpecker.test;
 
 public class MyCheck {
 

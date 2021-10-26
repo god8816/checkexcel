@@ -1,4 +1,4 @@
-package aaaaaaa;
+package org.zoo.woodpecker.test;
 
 import java.util.Date;
 
@@ -9,13 +9,13 @@ import org.zoo.woodpecker.bean.ExcelPrentBean;
 import lombok.Data;
 
 @Data
-public class BaBean extends ExcelPrentBean{
+public class ABean extends ExcelPrentBean{
 
   /**/
   private static final long serialVersionUID = 1L;
 	
 
-  @Woodpecker(commonCheck = CheckType.cn, errorMsg="名字不是中文")
+  @Woodpecker(commonCheck = CheckType.cn, errorMsg="名字不是中文",selfCheckClassName= MyCheck.class,selfCheckMethodName="checkName")
   private String name;
   
   @Woodpecker(commonCheck = CheckType.phone, errorMsg="手机号格式异常1")
