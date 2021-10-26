@@ -15,7 +15,7 @@ import org.zoo.woodpecker.util.ClassUtils.FieldCache;
 import org.zoo.woodpecker.util.StringUtil;
 /**
  * @author dzc
- * @param <T>
+ * @param excel处理
  */
 public class ExcelBuilder<T> {
 
