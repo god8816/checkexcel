@@ -1,10 +1,12 @@
 package org.zoo.woodpecker.builder;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.zoo.woodpecker.annotation.CheckType;
 import org.zoo.woodpecker.annotation.Woodpecker;
 import org.zoo.woodpecker.bean.ExcelPrentBean;
@@ -58,10 +60,10 @@ public class ExcelBuilder<T> {
 			for (FieldCache fieldCache : fieldCacheList) {
 				Woodpecker woodpecker = fieldCache.getField().getAnnotation(Woodpecker.class);
 				if(Objects.nonNull(woodpecker)) {
-					if(Objects.nonNull(woodpecker.selfCheckClassName()) && StringUtil.isEmpty(woodpecker.selfCheckMethodName()) ) {
+					if(woodpecker.selfCheckClassName().length>0 && StringUtil.isEmpty(woodpecker.selfCheckMethodName()) ) {
 						throw new WoodpeckerRuntimeException("selfCheckMethodName和selfCheckClassName只能同时存在");
 					}
-					if(Objects.isNull(woodpecker.selfCheckClassName()) && StringUtil.isNotEmpty(woodpecker.selfCheckMethodName()) ) {
+					if(woodpecker.selfCheckClassName().length==0 && StringUtil.isNotEmpty(woodpecker.selfCheckMethodName()) ) {
 						throw new WoodpeckerRuntimeException("selfCheckMethodName和selfCheckClassName只能同时存在");					
 					}
 					woodpeckerList.add(woodpecker);
@@ -96,18 +98,21 @@ public class ExcelBuilder<T> {
 	 * @return 
 	 * */
 	private Object recordCheck(Object o,List<FieldCache> fieldCacheList) { 
-		//手机号校验
-		List<FieldCache> fieldCachePhoneList = fieldCacheList.stream().filter(x->CheckType.phone.equals(x.getCheckType())).collect(Collectors.toList());
-		for (FieldCache fieldCachePhone : fieldCachePhoneList) {
-			if(Objects.nonNull(fieldCachePhone)) {
+		for (FieldCache fieldCache : fieldCacheList) {
+			//手机号校验
+			if(CheckType.phone.equals(fieldCache.getCheckType())) {
 				ExcelCheckServer excelCheckServer = new PhoneCheckServerImpl();
-				if(excelCheckServer.doCheck(fieldCachePhone) == false) {
-					excelCheckServer.printRecord(o,fieldCachePhone);
+				if(excelCheckServer.doCheck(fieldCache) == false) {
+					excelCheckServer.printRecord(o,fieldCache);
 				}
 			}
+			
+			//........
+			
+			
+			
+			
 		}
-		
-		
 		return o;
 	}
 	
