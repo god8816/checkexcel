@@ -5,11 +5,9 @@ import java.util.List;
 
 import org.zoo.woodpecker.ExcelCheck;
 
-public class Test {
+public class ExcelTest {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
 		List<ABean> listExcel = new ArrayList<ABean>();
 		for (int i=0;i<2;i++) {
 			ABean e = new ABean();
