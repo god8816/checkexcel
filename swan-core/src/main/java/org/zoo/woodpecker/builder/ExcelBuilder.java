@@ -19,17 +19,37 @@ import org.zoo.woodpecker.util.StringUtil;
  */
 public class ExcelBuilder<T> {
 
+    private volatile static ExcelBuilder singleton;  
     
     private List<Object> rightRecordList = new ArrayList<Object>();
 	
     private List<Object> errorRecordList = new ArrayList<Object>();
-	
- 
-	public ExcelBuilder list(List dataList, Class className) {
+    
+	/**
+	 * 构建单利模式ExcelBuilder
+	 * */
+    public static ExcelBuilder list(List dataList, Class className) {  
+	    if (singleton == null) {  
+	        synchronized (ExcelBuilder.class) {  
+		        if (singleton == null) {  
+		            singleton = new ExcelBuilder().createExcelBuilder(dataList, className);  
+		        }  
+	        }  
+	    }  
+	    return singleton;  
+    }  
+    
+    /**
+     * 创建ExcelBuilder
+     * */
+	public ExcelBuilder createExcelBuilder(List dataList, Class className) {
 		doRecord(dataList);
 		return this;
 	}
 	
+    /**
+     * 记录处理
+     * */
 	private void doRecord(List<Object> dataList) {
 		List<Woodpecker> woodpeckerList = new ArrayList<>();
 		for (Object o : dataList) {

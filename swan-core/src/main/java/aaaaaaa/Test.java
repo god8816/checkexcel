@@ -23,6 +23,12 @@ public class Test {
 		
 		List<AaBean> listRight = ExcelCheck.list(listExcel, AaBean.class).doRightRecord();
 		
+		
+		List<BaBean> blistError = ExcelCheck.list(listExcel, BaBean.class).doErrorRecord();
+		
+		List<BaBean> blistRight = ExcelCheck.list(listExcel, BaBean.class).doRightRecord();
+		
+		
 		System.out.println(123);
 	}
 
