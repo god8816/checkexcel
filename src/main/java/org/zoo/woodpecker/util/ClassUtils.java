@@ -76,11 +76,12 @@ public class ClassUtils {
         try {
             Field errorInfo = obj.getClass().getSuperclass().getDeclaredField("errorInfo");
             errorInfo.setAccessible(true);
-            //获取历史错误提示
-            String errorMassge = StringUtil.toString(errorInfo.get(obj));
+            String errorMassge = StringUtil.toString(errorInfo.get(obj)); //获取历史错误提示
             Woodpecker woodpecker = fieldCache.getField().getAnnotation(Woodpecker.class);
-            String newErrorMassge = new StringBuilder(errorMassge).append(woodpecker.errorMsg()).append(";").toString();
-			errorInfo.set(obj,newErrorMassge );
+            if(Objects.nonNull(woodpecker)) {
+                String newErrorMassge = new StringBuilder(errorMassge).append(woodpecker.errorMsg()).append(";").toString();
+    			errorInfo.set(obj,newErrorMassge );
+            }
 		} catch (NoSuchFieldException e) {
 			e.printStackTrace();
 			LOGGER.error("未继承ExcelPrentBean。");

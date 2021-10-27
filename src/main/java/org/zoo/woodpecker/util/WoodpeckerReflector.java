@@ -30,7 +30,7 @@ public class WoodpeckerReflector {
 				String  className = woodpecker.selfCheckClassName().getCanonicalName();
 				String methodName = woodpecker.selfCheckMethodName();
 				Class checkClass =Class.forName(className);
-				if(Objects.nonNull(className) && Objects.nonNull(methodName) ) 
+				if(!className.contains("StringUtil") && Objects.nonNull(methodName) ) 
 				{
 				   Object status = MethodUtils.invokeStaticMethod(checkClass, methodName, o,fieldCache.getValue());
 				   if(status.equals(true)) {
