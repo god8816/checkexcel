@@ -21,6 +21,9 @@ public class ABean extends ExcelPrentBean{
   @Woodpecker(commonCheck = CheckType.idcard, errorMsg="身份证格式异常")
   private String idcard;
   
+  @Woodpecker(commonCheck = CheckType.idcard, errorMsg="不是数字")
+  private String number;
+  
   @Woodpecker(commonCheck = CheckType.phone, errorMsg="手机号格式异常1")
   private String phone1;
   

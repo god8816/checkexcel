@@ -15,6 +15,7 @@ public class ExcelTest {
 			e.setPhone1("13193873308@");
 			e.setPhone2("13193873308@");
 			e.setIdcard("41152619880906571X1");
+			e.setNumber("0.123");
 			listExcel.add(e);
 		}
 		
@@ -23,10 +24,7 @@ public class ExcelTest {
 		List<ABean> listRight = ExcelCheck.list(listExcel, ABean.class).doRightRecord();
 		
 		
-		List<BBean> blistError = ExcelCheck.list(listExcel, BBean.class).doErrorRecord();
-		
-		List<BBean> blistRight = ExcelCheck.list(listExcel, BBean.class).doRightRecord();
-		
+
 		
 		System.out.println(123);
 	}

@@ -10,6 +10,7 @@ import org.zoo.woodpecker.exception.WoodpeckerRuntimeException;
 import org.zoo.woodpecker.handler.ExcelCheckServer;
 import org.zoo.woodpecker.handler.impl.DateFormatCheckServerImpl;
 import org.zoo.woodpecker.handler.impl.IdCardCheckServerImpl;
+import org.zoo.woodpecker.handler.impl.NumberFormatCheckServerImpl;
 import org.zoo.woodpecker.handler.impl.PhoneCheckServerImpl;
 import org.zoo.woodpecker.handler.impl.TimeFormatCheckServerImpl;
 import org.zoo.woodpecker.util.ClassUtils;
@@ -123,6 +124,14 @@ public class ExcelBuilder<T> {
 			//时间格式校验
 			if(CheckType.timeFormat.equals(fieldCache.getCheckType())) {
 				ExcelCheckServer excelCheckServer = new TimeFormatCheckServerImpl();
+				if(excelCheckServer.doCheck(fieldCache) == false) {
+					excelCheckServer.printRecord(o,fieldCache);
+				}
+			}
+			
+			//数字格式校验
+			if(CheckType.number.equals(fieldCache.getCheckType())) {
+				ExcelCheckServer excelCheckServer = new NumberFormatCheckServerImpl();
 				if(excelCheckServer.doCheck(fieldCache) == false) {
 					excelCheckServer.printRecord(o,fieldCache);
 				}
