@@ -27,6 +27,8 @@ public enum CheckType {
 	 phone,
 	 //身份证格式校验
 	 idcard,
+	 //日期格式校验
+	 dateFormat,
 	 //时间格式校验
 	 timeFormat,
 	 //邮箱校验

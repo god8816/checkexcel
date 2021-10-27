@@ -18,6 +18,9 @@ public class BBean extends ExcelPrentBean{
   @Woodpecker(commonCheck = CheckType.cn, errorMsg="名字不是中文")
   private String name;
   
+  @Woodpecker(commonCheck = CheckType.idcard, errorMsg="身份证格式异常")
+  private String idcard;
+  
   @Woodpecker(commonCheck = CheckType.phone, errorMsg="手机号格式异常1")
   private String phone1;
   
