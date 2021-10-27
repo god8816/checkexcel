@@ -15,7 +15,7 @@ public class ABean extends ExcelPrentBean{
   private static final long serialVersionUID = 1L;
 	
 
-  @Woodpecker(commonCheck = CheckType.cn, errorMsg="名字不是中文",selfCheckClassName= MyCheck.class,selfCheckMethodName="checkName")
+  @Woodpecker(commonCheck = CheckType.cn, errorMsg="名字不是小明",selfCheckClassName= MyCheck.class,selfCheckMethodName="checkName")
   private String name;
   
   @Woodpecker(commonCheck = CheckType.phone, errorMsg="手机号格式异常1")

@@ -56,6 +56,6 @@ public class WoodpeckerReflector {
 		}
 		
 		
-		return false;
+		return true;
     }
 }

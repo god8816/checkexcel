@@ -1,5 +1,7 @@
 package org.zoo.woodpecker.test;
 
+import org.zoo.woodpecker.util.StringUtil;
+
 public class MyCheck {
 
 	public static void main(String[] args) {
@@ -12,7 +14,9 @@ public class MyCheck {
 	 * key：待检查可以记录
 	 * */
 	public static boolean checkName(Object obj,Object key) {
-		
+		if("小明".equals(StringUtil.toString(key))) {
+			return true;
+		}
 		return false;
 	}
 
