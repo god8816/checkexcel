@@ -15,10 +15,10 @@ public class ABean extends ExcelPrentBean{
   private static final long serialVersionUID = 1L;
 	
 
-  @Woodpecker(commonCheck = CheckType.cn, errorMsg="名字不是小明",selfCheckClassName= MyCheck.class,selfCheckMethodName="checkName")
+  @Woodpecker(commonCheck = CheckType.cn,errorMsg="名字不是小明",selfCheckClassName= MyCheck.class,selfCheckMethodName="checkName")
   private String name;
   
-  @Woodpecker(commonCheck = CheckType.idcard, errorMsg="身份证格式异常")
+  @Woodpecker(commonCheck = CheckType.idcard,errorMsg="身份证格式异常")
   private String idcard;
   
   @Woodpecker(commonCheck = CheckType.idcard, errorMsg="不是数字")

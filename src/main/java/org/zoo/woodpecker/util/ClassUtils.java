@@ -56,6 +56,9 @@ public class ClassUtils {
 	       	 fieldCache.setValue(field.get(obj));
 	       	 if(Objects.nonNull(woodpecker)) {
 	       		fieldCache.setCheckType(woodpecker.commonCheck());
+	        	fieldCache.setRegularExp(woodpecker.regularExp());
+	        	fieldCache.setContainParam(woodpecker.containParam());
+	        	fieldCache.setNotContainParam(woodpecker.notContainParam());
 	       	 }
 	         fieldList.add(fieldCache);
 		} catch (Exception e) {
@@ -119,6 +122,23 @@ public class ClassUtils {
          * 校验类型
          * */
         private CheckType checkType;
+        
+    	/**
+         * 自定义正则表达式校验参数 ps：格式要求是正则表达式
+         */
+        private String regularExp;
+    	
+    	/**
+         * 包含那些参数
+         * @return the string
+         */
+        private String[] containParam;
+    	
+    	/**
+         * 不包含那些参数
+         * @return the string
+         */
+        private String[] notContainParam;
     }
 
 }

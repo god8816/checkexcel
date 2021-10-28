@@ -18,6 +18,11 @@ public class PhoneCheckServerImpl extends ExcelCheckServer{
 		if(StringUtil.isEmpty(phone)) {
 			return false;
 		}
+		
+		// notnull
+	
+		
+		
 		Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
 		Matcher m = p.matcher(phone); 
 		Boolean status =  m.matches();

@@ -4,7 +4,6 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-
 import org.zoo.woodpecker.util.StringUtil;
 
 
@@ -21,6 +20,24 @@ public @interface Woodpecker {
      * @return the string
      */
 	CheckType commonCheck();
+	
+	/**
+     * 自定义正则表达式校验参数 ps：格式要求是正则表达式
+     * @return the string
+     */
+	String regularExp() default "";
+	
+	/**
+     * 包含那些参数
+     * @return the string
+     */
+	String[] containParam() default {};
+	
+	/**
+     * 不包含那些参数
+     * @return the string
+     */
+	String[] notContainParam() default {};
 	
 	/**
      * 自定义类校验
