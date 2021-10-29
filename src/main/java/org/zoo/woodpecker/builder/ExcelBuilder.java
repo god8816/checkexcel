@@ -3,7 +3,7 @@ package org.zoo.woodpecker.builder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import org.zoo.woodpecker.annotation.CheckType;
+import org.zoo.woodpecker.annotation.BusinessCheckType;
 import org.zoo.woodpecker.annotation.Woodpecker;
 import org.zoo.woodpecker.bean.ExcelPrentBean;
 import org.zoo.woodpecker.exception.WoodpeckerRuntimeException;
@@ -98,7 +98,7 @@ public class ExcelBuilder<T> {
 	private Object recordCheck(Object o,List<FieldCache> fieldCacheList) { 
 		for (FieldCache fieldCache : fieldCacheList) {
 			//手机号校验
-			if(CheckType.phone.equals(fieldCache.getCheckType())) {
+			if(BusinessCheckType.phone.equals(fieldCache.getCheckType())) {
 				ExcelCheckServer excelCheckServer = new PhoneCheckServerImpl();
 				if(excelCheckServer.doCheck(fieldCache) == false) {
 					excelCheckServer.printRecord(o,fieldCache);
@@ -106,7 +106,7 @@ public class ExcelBuilder<T> {
 			}
 			
 			//身份证号校验
-			if(CheckType.idcard.equals(fieldCache.getCheckType())) {
+			if(BusinessCheckType.idcard.equals(fieldCache.getCheckType())) {
 				ExcelCheckServer excelCheckServer = new IdCardCheckServerImpl();
 				if(excelCheckServer.doCheck(fieldCache) == false) {
 					excelCheckServer.printRecord(o,fieldCache);

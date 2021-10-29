@@ -19,7 +19,13 @@ public @interface Woodpecker {
      * 公共校验 校验类型：CheckType
      * @return the string
      */
-	CheckType commonCheck();
+	BusinessCheckType commonCheck();
+	
+	/**
+     * 字段空判断校验 校验类型：CheckType  默认不校验空
+     * @return the string
+     */
+	EmptyCheckType emptyCheckType() default EmptyCheckType.empty;
 	
 	/**
      * 自定义正则表达式校验参数 ps：格式要求是正则表达式

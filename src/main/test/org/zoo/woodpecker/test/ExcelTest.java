@@ -13,7 +13,7 @@ public class ExcelTest {
 			ABean e = new ABean();
 			e.setName("名字_"+i);
 			e.setPhone1("13193873308@");
-			e.setPhone2("13193873308@");
+			//e.setPhone2("13193873308@");
 			e.setIdcard("41152619880906571X1");
 			e.setNumber("0.123");
 			listExcel.add(e);

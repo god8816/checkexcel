@@ -7,7 +7,8 @@ import java.util.List;
 import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.zoo.woodpecker.annotation.CheckType;
+import org.zoo.woodpecker.annotation.BusinessCheckType;
+import org.zoo.woodpecker.annotation.EmptyCheckType;
 import org.zoo.woodpecker.annotation.Woodpecker;
 import com.alibaba.fastjson.JSON;
 import lombok.Data;
@@ -55,6 +56,7 @@ public class ClassUtils {
 	       	 fieldCache.setName(field.getName());
 	       	 fieldCache.setValue(field.get(obj));
 	       	 if(Objects.nonNull(woodpecker)) {
+	       		fieldCache.setCheckEmptyType(woodpecker.emptyCheckType());
 	       		fieldCache.setCheckType(woodpecker.commonCheck());
 	        	fieldCache.setRegularExp(woodpecker.regularExp());
 	        	fieldCache.setContainParam(woodpecker.containParam());
@@ -121,7 +123,12 @@ public class ClassUtils {
         /**
          * 校验类型
          * */
-        private CheckType checkType;
+        private BusinessCheckType checkType;
+        
+        /**
+         * 判断空、非空
+         * */
+        private EmptyCheckType checkEmptyType;
         
     	/**
          * 自定义正则表达式校验参数 ps：格式要求是正则表达式
