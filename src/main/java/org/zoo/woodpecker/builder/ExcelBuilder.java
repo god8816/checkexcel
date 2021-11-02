@@ -157,8 +157,32 @@ public class ExcelBuilder<T> {
 				}
 			}
 			
+			//省校验
+			if(BusinessCheckType.province.equals(fieldCache.getCheckType())) {
+				ExcelCheckServer excelCheckServer = new EmailFormatCheckServerImpl();
+				if(excelCheckServer.doCheck(fieldCache) == false) {
+					excelCheckServer.printRecord(o,Constant.phoneMsg,fieldCache);
+				}
+			}
+			
+			//省、市校验
+			if(BusinessCheckType.city.equals(fieldCache.getCheckType())) {
+				ExcelCheckServer excelCheckServer = new EmailFormatCheckServerImpl();
+				if(excelCheckServer.doCheck(fieldCache) == false) {
+					excelCheckServer.printRecord(o,Constant.phoneMsg,fieldCache);
+				}
+			}
+			
+			//省、市、区校验
+			if(BusinessCheckType.area.equals(fieldCache.getCheckType())) {
+				ExcelCheckServer excelCheckServer = new EmailFormatCheckServerImpl();
+				if(excelCheckServer.doCheck(fieldCache) == false) {
+					excelCheckServer.printRecord(o,Constant.phoneMsg,fieldCache);
+				}
+			}
+			
 			//省、市、区、街道校验
-			if(BusinessCheckType.email.equals(fieldCache.getCheckType())) {
+			if(BusinessCheckType.street.equals(fieldCache.getCheckType())) {
 				ExcelCheckServer excelCheckServer = new EmailFormatCheckServerImpl();
 				if(excelCheckServer.doCheck(fieldCache) == false) {
 					excelCheckServer.printRecord(o,Constant.phoneMsg,fieldCache);
