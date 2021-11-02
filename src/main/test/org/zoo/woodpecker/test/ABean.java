@@ -1,9 +1,7 @@
 package org.zoo.woodpecker.test;
 
 import java.util.Date;
-
 import org.zoo.woodpecker.annotation.BusinessCheckType;
-import org.zoo.woodpecker.annotation.EmptyCheckType;
 import org.zoo.woodpecker.annotation.RepeatCheckType;
 import org.zoo.woodpecker.annotation.Woodpecker;
 import org.zoo.woodpecker.bean.ExcelPrentBean;

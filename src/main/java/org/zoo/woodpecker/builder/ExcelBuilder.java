@@ -156,6 +156,14 @@ public class ExcelBuilder<T> {
 				}
 			}
 			
+			//省、市、区、街道校验
+			if(BusinessCheckType.email.equals(fieldCache.getCheckType())) {
+				ExcelCheckServer excelCheckServer = new EmailFormatCheckServerImpl();
+				if(excelCheckServer.doCheck(fieldCache) == false) {
+					excelCheckServer.printRecord(o,fieldCache);
+				}
+			}
+			
 			//判断列重复
 			if(RepeatCheckType.notRepeat.equals(fieldCache.getCheckRepeatType())) {
 				for (Object obj : dataList) {
@@ -184,8 +192,7 @@ public class ExcelBuilder<T> {
 				}
 			}
 			
-			// TODO 待完成其他场景 ........
-			
+		
 			
 			
 		   //自定义校验
