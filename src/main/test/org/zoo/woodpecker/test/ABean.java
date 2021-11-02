@@ -39,5 +39,8 @@ public class ABean extends ExcelPrentBean{
   
   @Woodpecker(commonCheck = BusinessCheckType.cn, errorMsg="不是中文")
   private String cn;
+  
+  @Woodpecker(commonCheck = BusinessCheckType.email, errorMsg="不邮箱")
+  private String email;
 
 }

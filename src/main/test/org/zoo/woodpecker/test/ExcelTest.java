@@ -18,6 +18,7 @@ public class ExcelTest {
 			e.setNumber("-34324x");
 			e.setEn("woshiyinwen");
 			e.setCn("我是中文");
+			e.setEmail("948@qq.com");
 			listExcel.add(e);
 		}
 		

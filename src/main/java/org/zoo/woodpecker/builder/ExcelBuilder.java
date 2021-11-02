@@ -9,6 +9,7 @@ import org.zoo.woodpecker.bean.ExcelPrentBean;
 import org.zoo.woodpecker.exception.WoodpeckerRuntimeException;
 import org.zoo.woodpecker.handler.ExcelCheckServer;
 import org.zoo.woodpecker.handler.impl.CnFormatCheckServerImpl;
+import org.zoo.woodpecker.handler.impl.EmailFormatCheckServerImpl;
 import org.zoo.woodpecker.handler.impl.EnFormatCheckServerImpl;
 //import org.zoo.woodpecker.handler.impl.DateFormatCheckServerImpl;
 import org.zoo.woodpecker.handler.impl.IdCardCheckServerImpl;
@@ -151,6 +152,14 @@ public class ExcelBuilder<T> {
 			//中文格式校验
 			if(BusinessCheckType.cn.equals(fieldCache.getCheckType())) {
 				ExcelCheckServer excelCheckServer = new CnFormatCheckServerImpl();
+				if(excelCheckServer.doCheck(fieldCache) == false) {
+					excelCheckServer.printRecord(o,fieldCache);
+				}
+			}
+
+			//邮箱格式校验
+			if(BusinessCheckType.email.equals(fieldCache.getCheckType())) {
+				ExcelCheckServer excelCheckServer = new EmailFormatCheckServerImpl();
 				if(excelCheckServer.doCheck(fieldCache) == false) {
 					excelCheckServer.printRecord(o,fieldCache);
 				}
