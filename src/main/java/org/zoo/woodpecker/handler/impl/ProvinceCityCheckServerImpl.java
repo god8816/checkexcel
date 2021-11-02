@@ -7,10 +7,10 @@ import org.zoo.woodpecker.util.StringUtil;
 
 
 /**
- * 省校验
+ * 省市校验
  * @author dzc
  */
-public class ProvinceCheckServerImpl extends ExcelCheckServer{
+public class ProvinceCityCheckServerImpl extends ExcelCheckServer{
 
 	public Boolean doCheck(Object o,FieldCache fieldCache) {
 		String value = StringUtil.toString(fieldCache.getValue());

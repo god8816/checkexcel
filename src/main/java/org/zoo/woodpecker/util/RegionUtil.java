@@ -43,7 +43,7 @@ public class RegionUtil {
 	} 
 	
 	
-    /**加载省市区街道数据*/ 
+    /**省判断*/ 
 	public static boolean provinceCheck(Object province){
 		//名称校验
 		if(province instanceof String) {
@@ -56,6 +56,27 @@ public class RegionUtil {
 		//编码校验
 		if(province instanceof Integer) {
 			long num =  regionList().stream().filter(x->x.getProvinceCode().equals(province)).count();
+			if(num>0) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	
+    /**省判断*/ 
+	public static boolean provinceCityCheck(Object province,Object city){
+		//名称校验
+		if(province instanceof String && city instanceof String) {
+			long num =  regionList().stream().filter(x->x.getProvinceName().equals(province) && x.getCityName().equals(city)).count();
+			if(num>0) {
+				return true;
+			}
+		}
+		
+		//编码校验
+		if(province instanceof Integer && city instanceof Integer) {
+			long num =  regionList().stream().filter(x->x.getProvinceCode().equals(province)  && x.getCityCode().equals(city)).count();
 			if(num>0) {
 				return true;
 			}
