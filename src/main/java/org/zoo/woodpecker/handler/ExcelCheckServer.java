@@ -19,7 +19,7 @@ public abstract class ExcelCheckServer {
 	 * 获取错误提示语并打印
 	 * @param fieldCache 
 	 * */
-	public void printRecord(Object o, FieldCache fieldCache) {
-		ClassUtils.writeErrorInfoField(o, fieldCache);
+	public void printRecord(Object o,String errorMsg, FieldCache fieldCache) {
+		ClassUtils.writeErrorInfoField(o,errorMsg, fieldCache);
 	}
 }

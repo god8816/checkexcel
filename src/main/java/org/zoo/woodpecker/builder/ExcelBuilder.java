@@ -21,6 +21,7 @@ import org.zoo.woodpecker.handler.impl.NumberFormatCheckServerImpl;
 import org.zoo.woodpecker.handler.impl.PhoneCheckServerImpl;
 import org.zoo.woodpecker.util.ClassUtils;
 import org.zoo.woodpecker.util.ClassUtils.FieldCache;
+import org.zoo.woodpecker.util.Constant;
 import org.zoo.woodpecker.util.StringUtil;
 import org.zoo.woodpecker.util.WoodpeckerReflector;
 
@@ -112,7 +113,7 @@ public class ExcelBuilder<T> {
 			if(BusinessCheckType.phone.equals(fieldCache.getCheckType())) {
 				ExcelCheckServer excelCheckServer = new PhoneCheckServerImpl();
 				if(excelCheckServer.doCheck(fieldCache) == false) {
-					excelCheckServer.printRecord(o,fieldCache);
+					excelCheckServer.printRecord(o,Constant.phoneMsg,fieldCache);
 				}
 			}
 			
@@ -120,7 +121,7 @@ public class ExcelBuilder<T> {
 			if(BusinessCheckType.idcard.equals(fieldCache.getCheckType())) {
 				ExcelCheckServer excelCheckServer = new IdCardCheckServerImpl();
 				if(excelCheckServer.doCheck(fieldCache) == false) {
-					excelCheckServer.printRecord(o,fieldCache);
+					excelCheckServer.printRecord(o,Constant.idcardMsg,fieldCache);
 				}
 			}
 			
@@ -128,7 +129,7 @@ public class ExcelBuilder<T> {
 			if(BusinessCheckType.number.equals(fieldCache.getCheckType())) {
 				ExcelCheckServer excelCheckServer = new NumberFormatCheckServerImpl();
 				if(excelCheckServer.doCheck(fieldCache) == false) {
-					excelCheckServer.printRecord(o,fieldCache);
+					excelCheckServer.printRecord(o,"",fieldCache);
 				}
 			}
 			
@@ -136,7 +137,7 @@ public class ExcelBuilder<T> {
 			if(BusinessCheckType.en.equals(fieldCache.getCheckType())) {
 				ExcelCheckServer excelCheckServer = new EnFormatCheckServerImpl();
 				if(excelCheckServer.doCheck(fieldCache) == false) {
-					excelCheckServer.printRecord(o,fieldCache);
+					excelCheckServer.printRecord(o,"",fieldCache);
 				}
 			}
 			
@@ -144,7 +145,7 @@ public class ExcelBuilder<T> {
 			if(BusinessCheckType.cn.equals(fieldCache.getCheckType())) {
 				ExcelCheckServer excelCheckServer = new CnFormatCheckServerImpl();
 				if(excelCheckServer.doCheck(fieldCache) == false) {
-					excelCheckServer.printRecord(o,fieldCache);
+					excelCheckServer.printRecord(o,"",fieldCache);
 				}
 			}
 
@@ -152,7 +153,7 @@ public class ExcelBuilder<T> {
 			if(BusinessCheckType.email.equals(fieldCache.getCheckType())) {
 				ExcelCheckServer excelCheckServer = new EmailFormatCheckServerImpl();
 				if(excelCheckServer.doCheck(fieldCache) == false) {
-					excelCheckServer.printRecord(o,fieldCache);
+					excelCheckServer.printRecord(o,Constant.emailMsg,fieldCache);
 				}
 			}
 			
@@ -160,7 +161,7 @@ public class ExcelBuilder<T> {
 			if(BusinessCheckType.email.equals(fieldCache.getCheckType())) {
 				ExcelCheckServer excelCheckServer = new EmailFormatCheckServerImpl();
 				if(excelCheckServer.doCheck(fieldCache) == false) {
-					excelCheckServer.printRecord(o,fieldCache);
+					excelCheckServer.printRecord(o,Constant.phoneMsg,fieldCache);
 				}
 			}
 			
@@ -176,7 +177,7 @@ public class ExcelBuilder<T> {
 			            Field fileInfo = obj.getClass().getDeclaredField(fieldCache.getName());
 			            fileInfo.setAccessible(true);
 			            if(fieldCache.getValue().equals(fileInfo.get(obj))) {
-			            	ClassUtils.writeErrorInfoField(o, fieldCache);
+			            	ClassUtils.writeErrorInfoField(o,Constant.repeatMsg,fieldCache);
 			            }
 			            
 					} catch (NoSuchFieldException e) {
@@ -197,7 +198,7 @@ public class ExcelBuilder<T> {
 			
 		   //自定义校验
 		   if(!WoodpeckerReflector.execute(o,fieldCache)) {
-				ClassUtils.writeErrorInfoField(o, fieldCache);
+				ClassUtils.writeErrorInfoField(o,"", fieldCache);
 		   }
 		}
 		return o;

@@ -74,7 +74,7 @@ public class ClassUtils {
     /**
      * 写入异常字段提示语
      * */
-    public static Object writeErrorInfoField(Object obj,FieldCache fieldCache) {
+    public static Object writeErrorInfoField(Object obj,String errorMsg,FieldCache fieldCache) {
     	Class<?> clazz = obj.getClass();
         if (clazz == null) {
             return null;
@@ -83,10 +83,12 @@ public class ClassUtils {
         try {
             Field errorInfo = obj.getClass().getSuperclass().getDeclaredField("errorInfo");
             errorInfo.setAccessible(true);
-            String errorMassge = StringUtil.toString(errorInfo.get(obj)); //获取历史错误提示
+            if(StringUtil.isEmpty(errorMsg)) {
+            	errorMsg = StringUtil.toString(errorInfo.get(obj)); 
+            }
             Woodpecker woodpecker = fieldCache.getField().getAnnotation(Woodpecker.class);
             if(Objects.nonNull(woodpecker)) {
-                String newErrorMassge = new StringBuilder(errorMassge).append(woodpecker.errorMsg()).append(";").toString();
+                String newErrorMassge = new StringBuilder(errorMsg).append(woodpecker.errorMsg()).append(";").toString();
     			errorInfo.set(obj,newErrorMassge );
             }
 		} catch (NoSuchFieldException e) {

@@ -67,5 +67,5 @@ public @interface Woodpecker {
      * 异常提示语
      * @return the string
      */
-    String errorMsg() default "字段异常";
+    String errorMsg() default "字段异常;";
 }
