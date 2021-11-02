@@ -29,7 +29,7 @@ public enum BusinessCheckType {
 	 idcard,
 	 //日期格式校验
 	 dateFormat,
-	 //时间格式校验
+	 //时间格式校验 
 	 timeFormat,
 	 //邮箱校验
 	 email,

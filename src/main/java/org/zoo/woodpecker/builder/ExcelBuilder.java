@@ -11,16 +11,15 @@ import org.zoo.woodpecker.handler.ExcelCheckServer;
 import org.zoo.woodpecker.handler.impl.CnFormatCheckServerImpl;
 import org.zoo.woodpecker.handler.impl.EmailFormatCheckServerImpl;
 import org.zoo.woodpecker.handler.impl.EnFormatCheckServerImpl;
-//import org.zoo.woodpecker.handler.impl.DateFormatCheckServerImpl;
 import org.zoo.woodpecker.handler.impl.IdCardCheckServerImpl;
 import org.zoo.woodpecker.handler.impl.NumberFormatCheckServerImpl;
-//import org.zoo.woodpecker.handler.impl.NumberFormatCheckServerImpl;
 import org.zoo.woodpecker.handler.impl.PhoneCheckServerImpl;
-//import org.zoo.woodpecker.handler.impl.TimeFormatCheckServerImpl;
 import org.zoo.woodpecker.util.ClassUtils;
 import org.zoo.woodpecker.util.ClassUtils.FieldCache;
 import org.zoo.woodpecker.util.StringUtil;
 import org.zoo.woodpecker.util.WoodpeckerReflector;
+
+
 /**
  * @author dzc
  * @param excel处理
@@ -116,22 +115,6 @@ public class ExcelBuilder<T> {
 					excelCheckServer.printRecord(o,fieldCache);
 				}
 			}
-			
-			//日期格式校验
-//			if(BusinessCheckType.dateFormat.equals(fieldCache.getCheckType())) {
-//				ExcelCheckServer excelCheckServer = new DateFormatCheckServerImpl();
-//				if(excelCheckServer.doCheck(fieldCache) == false) {
-//					excelCheckServer.printRecord(o,fieldCache);
-//				}
-//			}
-			
-			//时间格式校验
-//			if(BusinessCheckType.timeFormat.equals(fieldCache.getCheckType())) {
-//				ExcelCheckServer excelCheckServer = new TimeFormatCheckServerImpl();
-//				if(excelCheckServer.doCheck(fieldCache) == false) {
-//					excelCheckServer.printRecord(o,fieldCache);
-//				}
-//			}
 			
 			//数字格式校验
 			if(BusinessCheckType.number.equals(fieldCache.getCheckType())) {
