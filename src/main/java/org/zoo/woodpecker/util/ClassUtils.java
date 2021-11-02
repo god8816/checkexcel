@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.zoo.woodpecker.annotation.BusinessCheckType;
 import org.zoo.woodpecker.annotation.EmptyCheckType;
+import org.zoo.woodpecker.annotation.RepeatCheckType;
 import org.zoo.woodpecker.annotation.Woodpecker;
 import com.alibaba.fastjson.JSON;
 import lombok.Data;
@@ -38,7 +39,7 @@ public class ClassUtils {
         }
 
         List<FieldCache> fieldList = new ArrayList<>();
-        for (Field field : tempFieldList) {
+        for (Field field : tempFieldList) { 
             declaredOneField(field,obj,fieldList);
         }
         return fieldList;
@@ -61,6 +62,7 @@ public class ClassUtils {
 	        	fieldCache.setRegularExp(woodpecker.regularExp());
 	        	fieldCache.setContainParam(woodpecker.containParam());
 	        	fieldCache.setNotContainParam(woodpecker.notContainParam());
+	        	fieldCache.setCheckRepeatType(woodpecker.repeatCheckType());
 	       	 }
 	         fieldList.add(fieldCache);
 		} catch (Exception e) {
@@ -129,6 +131,11 @@ public class ClassUtils {
          * 判断空、非空
          * */
         private EmptyCheckType checkEmptyType;
+        
+        /**
+         * 判断导入重复、不判断导入重复
+         * */
+        private RepeatCheckType checkRepeatType;
         
     	/**
          * 自定义正则表达式校验参数 ps：格式要求是正则表达式

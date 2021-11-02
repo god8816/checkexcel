@@ -1,9 +1,14 @@
 package org.zoo.woodpecker.builder;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.zoo.woodpecker.annotation.BusinessCheckType;
+import org.zoo.woodpecker.annotation.RepeatCheckType;
 import org.zoo.woodpecker.annotation.Woodpecker;
 import org.zoo.woodpecker.bean.ExcelPrentBean;
 import org.zoo.woodpecker.exception.WoodpeckerRuntimeException;
@@ -25,6 +30,8 @@ import org.zoo.woodpecker.util.WoodpeckerReflector;
  * @param excel处理
  */
 public class ExcelBuilder<T> {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(ExcelBuilder.class);
 
     private volatile static ExcelBuilder singleton;  
     
@@ -72,7 +79,7 @@ public class ExcelBuilder<T> {
 			}
 			
 			//记录是否正确校验
-			Object obj = recordCheck(o,fieldCacheList);
+			Object obj = recordCheck(o,fieldCacheList,dataList);
 			ExcelPrentBean excelBean = (ExcelPrentBean)o;
 			if(StringUtil.isEmpty(excelBean.getErrorInfo())) {
 				rightRecordList.add(obj);
@@ -96,9 +103,10 @@ public class ExcelBuilder<T> {
 
 	/**
 	 * 字段检查
+	 * @param dataList 
 	 * @return 
 	 * */
-	private Object recordCheck(Object o,List<FieldCache> fieldCacheList) { 
+	private Object recordCheck(Object o,List<FieldCache> fieldCacheList, List<Object> dataList) { 
 		for (FieldCache fieldCache : fieldCacheList) {
 			//手机号校验
 			if(BusinessCheckType.phone.equals(fieldCache.getCheckType())) {
@@ -148,7 +156,36 @@ public class ExcelBuilder<T> {
 				}
 			}
 			
+			//判断列重复
+			if(RepeatCheckType.notRepeat.equals(fieldCache.getCheckRepeatType())) {
+				for (Object obj : dataList) {
+					Class<?> clazz = obj.getClass();
+			        if (clazz == null) {
+			            return null;
+			        }
+			        
+			        try {
+			            Field fileInfo = obj.getClass().getDeclaredField(fieldCache.getName());
+			            fileInfo.setAccessible(true);
+			            if(fieldCache.getValue().equals(fileInfo.get(obj))) {
+			            	ClassUtils.writeErrorInfoField(o, fieldCache);
+			            }
+			            
+					} catch (NoSuchFieldException e) {
+						e.printStackTrace();
+						LOGGER.error("未继承ExcelPrentBean。");
+					} catch (IllegalArgumentException e) {
+						e.printStackTrace();
+						LOGGER.error("反射参数获取。");
+					} catch (IllegalAccessException e) {
+						e.printStackTrace();
+						LOGGER.error("反射读权限异常。");
+					}   
+				}
+			}
+			
 			// TODO 待完成其他场景 ........
+			
 			
 			
 		   //自定义校验

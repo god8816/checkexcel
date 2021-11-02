@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.zoo.woodpecker.annotation.BusinessCheckType;
 import org.zoo.woodpecker.annotation.EmptyCheckType;
+import org.zoo.woodpecker.annotation.RepeatCheckType;
 import org.zoo.woodpecker.annotation.Woodpecker;
 import org.zoo.woodpecker.bean.ExcelPrentBean;
 
@@ -25,7 +26,7 @@ public class ABean extends ExcelPrentBean{
   @Woodpecker(commonCheck = BusinessCheckType.number, errorMsg="不是数字")
   private String number;
   
-  @Woodpecker(commonCheck = BusinessCheckType.phone, errorMsg="手机号格式异常1")
+  @Woodpecker(commonCheck = BusinessCheckType.phone,repeatCheckType = RepeatCheckType.notRepeat, errorMsg="手机号格式异常1")
   private String phone1;
   
   @Woodpecker(commonCheck = BusinessCheckType.number, errorMsg="年纪不是数字")

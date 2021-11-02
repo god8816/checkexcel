@@ -21,9 +21,9 @@ package org.zoo.woodpecker.annotation;
  * 字段判空检查
  * @author dzc
  */
-public enum EmptyCheckType {
-	 //不需要判空
-	 empty,
-	 //需要空判断
-	 notEmpty;
+public enum RepeatCheckType {
+	 //不需要判断列重复
+	 repeat,
+	 //需要判断重复
+	 notRepeat;
 }

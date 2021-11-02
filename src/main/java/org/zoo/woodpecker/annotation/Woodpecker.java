@@ -25,7 +25,13 @@ public @interface Woodpecker {
      * 字段空判断校验 校验类型：CheckType  默认不校验空
      * @return the string
      */
-	EmptyCheckType emptyCheckType() default EmptyCheckType.empty;
+	EmptyCheckType emptyCheckType() default EmptyCheckType.empty; 
+	
+	/**
+     * 字段空判断校验 校验类型：CheckType  默认不校验重复
+     * @return the string
+     */
+	RepeatCheckType repeatCheckType() default RepeatCheckType.repeat; 
 	
 	/**
      * 自定义正则表达式校验参数 ps：格式要求是正则表达式
