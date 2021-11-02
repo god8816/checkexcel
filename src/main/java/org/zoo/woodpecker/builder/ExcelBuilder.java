@@ -19,6 +19,7 @@ import org.zoo.woodpecker.handler.impl.EnFormatCheckServerImpl;
 import org.zoo.woodpecker.handler.impl.IdCardCheckServerImpl;
 import org.zoo.woodpecker.handler.impl.NumberFormatCheckServerImpl;
 import org.zoo.woodpecker.handler.impl.PhoneCheckServerImpl;
+import org.zoo.woodpecker.handler.impl.ProvinceCheckServerImpl;
 import org.zoo.woodpecker.util.ClassUtils;
 import org.zoo.woodpecker.util.ClassUtils.FieldCache;
 import org.zoo.woodpecker.util.Constant;
@@ -160,8 +161,9 @@ public class ExcelBuilder<T> {
 			
 			//省校验
 			if(BusinessCheckType.province.equals(fieldCache.getCheckType())) {
-				if(RegionUtil.provinceCheck(fieldCache.getValue())) {
-					ClassUtils.writeErrorInfoField(o,Constant.provinceMsg,fieldCache);
+				ExcelCheckServer excelCheckServer = new ProvinceCheckServerImpl();
+				if(excelCheckServer.doCheck(o,fieldCache) == false) {
+					excelCheckServer.printRecord(o,Constant.provinceMsg,fieldCache);
 				}
 			}
 			
