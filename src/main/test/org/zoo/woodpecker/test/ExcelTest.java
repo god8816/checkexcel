@@ -11,11 +11,13 @@ public class ExcelTest {
 		List<ABean> listExcel = new ArrayList<ABean>();
 		for (int i=0;i<2;i++) {
 			ABean e = new ABean();
-			e.setName("名字_"+i);
+			e.setName("名字");
 			e.setPhone1("13193873308@");
 			//e.setPhone2("13193873308@");
 			e.setIdcard("41152619880906571X1");
-			e.setNumber("0.123");
+			e.setNumber("-34324x");
+			e.setEn("woshiyinwen");
+			e.setCn("我是中文");
 			listExcel.add(e);
 		}
 		

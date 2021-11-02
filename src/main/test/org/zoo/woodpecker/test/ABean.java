@@ -28,13 +28,16 @@ public class ABean extends ExcelPrentBean{
   @Woodpecker(commonCheck = BusinessCheckType.phone, errorMsg="手机号格式异常1")
   private String phone1;
   
-  @Woodpecker(commonCheck = BusinessCheckType.phone, emptyCheckType=EmptyCheckType.notEmpty,errorMsg="手机号格式异常2")
-  private String phone2;
-  
   @Woodpecker(commonCheck = BusinessCheckType.number, errorMsg="年纪不是数字")
   private Integer age;
   
   @Woodpecker(commonCheck = BusinessCheckType.timeFormat, errorMsg="时间格式异常")
   private Date dataTime;
+  
+  @Woodpecker(commonCheck = BusinessCheckType.en, errorMsg="不是英文")
+  private String en;
+  
+  @Woodpecker(commonCheck = BusinessCheckType.cn, errorMsg="不是中文")
+  private String cn;
 
 }

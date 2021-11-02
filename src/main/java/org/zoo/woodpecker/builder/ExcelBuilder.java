@@ -8,6 +8,8 @@ import org.zoo.woodpecker.annotation.Woodpecker;
 import org.zoo.woodpecker.bean.ExcelPrentBean;
 import org.zoo.woodpecker.exception.WoodpeckerRuntimeException;
 import org.zoo.woodpecker.handler.ExcelCheckServer;
+import org.zoo.woodpecker.handler.impl.CnFormatCheckServerImpl;
+import org.zoo.woodpecker.handler.impl.EnFormatCheckServerImpl;
 //import org.zoo.woodpecker.handler.impl.DateFormatCheckServerImpl;
 import org.zoo.woodpecker.handler.impl.IdCardCheckServerImpl;
 import org.zoo.woodpecker.handler.impl.NumberFormatCheckServerImpl;
@@ -133,6 +135,22 @@ public class ExcelBuilder<T> {
 			//数字格式校验
 			if(BusinessCheckType.number.equals(fieldCache.getCheckType())) {
 				ExcelCheckServer excelCheckServer = new NumberFormatCheckServerImpl();
+				if(excelCheckServer.doCheck(fieldCache) == false) {
+					excelCheckServer.printRecord(o,fieldCache);
+				}
+			}
+			
+			//英文格式校验
+			if(BusinessCheckType.en.equals(fieldCache.getCheckType())) {
+				ExcelCheckServer excelCheckServer = new EnFormatCheckServerImpl();
+				if(excelCheckServer.doCheck(fieldCache) == false) {
+					excelCheckServer.printRecord(o,fieldCache);
+				}
+			}
+			
+			//中文格式校验
+			if(BusinessCheckType.cn.equals(fieldCache.getCheckType())) {
+				ExcelCheckServer excelCheckServer = new CnFormatCheckServerImpl();
 				if(excelCheckServer.doCheck(fieldCache) == false) {
 					excelCheckServer.printRecord(o,fieldCache);
 				}
