@@ -188,12 +188,12 @@ public class ExcelBuilder<T> {
 				}
 				
 				//省、市、区、街道校验
-				if(BusinessCheckType.street.equals(fieldCache.getCheckType())) {
-					ExcelCheckServer excelCheckServer = new EmailFormatCheckServerImpl();
-					if(excelCheckServer.doCheck(o,fieldCache) == false) {
-						excelCheckServer.printRecord(o,Constant.phoneMsg,fieldCache);
-					}
-				}
+//				if(BusinessCheckType.street.equals(fieldCache.getCheckType())) {
+//					ExcelCheckServer excelCheckServer = new EmailFormatCheckServerImpl();
+//					if(excelCheckServer.doCheck(o,fieldCache) == false) {
+//						excelCheckServer.printRecord(o,Constant.phoneMsg,fieldCache);
+//					}
+//				}
 			}
 			
 			//判断列重复

@@ -25,7 +25,7 @@ public class ABean extends ExcelPrentBean{
   private String number;
   
   @Woodpecker(commonCheck = BusinessCheckType.phone,repeatCheckType = RepeatCheckType.notRepeat, errorMsg="手机号格式异常1")
-  private String phone1;
+  private String phone;
   
   @Woodpecker(commonCheck = BusinessCheckType.number, errorMsg="年纪不是数字")
   private Integer age;
@@ -41,5 +41,17 @@ public class ABean extends ExcelPrentBean{
   
   @Woodpecker(commonCheck = BusinessCheckType.email, errorMsg="不邮箱")
   private String email;
+  
+  @Woodpecker(commonCheck = BusinessCheckType.province, errorMsg="省填写异常")
+  private String province;
+  
+  @Woodpecker(commonCheck = BusinessCheckType.city, errorMsg="市填写异常")
+  private String city;
+  
+  @Woodpecker(commonCheck = BusinessCheckType.area, errorMsg="区填写异常")
+  private String area;
+  
+  @Woodpecker(commonCheck = BusinessCheckType.street, errorMsg="街道填写异常")
+  private String street;
 
 }

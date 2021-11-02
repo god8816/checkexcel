@@ -24,16 +24,16 @@ public class ProvinceCityAreaStreetCheckServerImpl extends ExcelCheckServer{
 		for (FieldCache cityFieldCache : fieldCacheList) {
 			Woodpecker woodpecker = cityFieldCache.getField().getAnnotation(Woodpecker.class);
 			if(Objects.nonNull(woodpecker)) {
-				if(BusinessCheckType.province.equals(fieldCache.getCheckType())) {
-					provinceValue = fieldCache.getValue();
+				if(BusinessCheckType.province.equals(cityFieldCache.getCheckType())) {
+					provinceValue = cityFieldCache.getValue();
 				} 
 				
-				if(BusinessCheckType.city.equals(fieldCache.getCheckType())) {
-					cityValue = fieldCache.getValue();
+				if(BusinessCheckType.city.equals(cityFieldCache.getCheckType())) {
+					cityValue = cityFieldCache.getValue();
 				} 
 				
-				if(BusinessCheckType.area.equals(fieldCache.getCheckType())) {
-					areaValue = fieldCache.getValue();
+				if(BusinessCheckType.area.equals(cityFieldCache.getCheckType())) {
+					areaValue = cityFieldCache.getValue();
 				} 
 			}
 		}
