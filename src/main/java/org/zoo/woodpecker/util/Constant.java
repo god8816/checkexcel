@@ -14,5 +14,9 @@ public class Constant {
 
    public static String repeatMsg = "记录重复;";
 
-   public static String provinceMsg =  "省填写错误;"; 
+   public static String provinceMsg =  "省填写错误;";
+
+   public static String provinceCityMsg = "省市填写错误或不匹配;";
+
+   public static String provinceCityAreaMsg  = "省市区填写错误或不匹配;";
 }

@@ -20,6 +20,8 @@ import org.zoo.woodpecker.handler.impl.IdCardCheckServerImpl;
 import org.zoo.woodpecker.handler.impl.NumberFormatCheckServerImpl;
 import org.zoo.woodpecker.handler.impl.PhoneCheckServerImpl;
 import org.zoo.woodpecker.handler.impl.ProvinceCheckServerImpl;
+import org.zoo.woodpecker.handler.impl.ProvinceCityAreaCheckServerImpl;
+import org.zoo.woodpecker.handler.impl.ProvinceCityCheckServerImpl;
 import org.zoo.woodpecker.util.ClassUtils;
 import org.zoo.woodpecker.util.ClassUtils.FieldCache;
 import org.zoo.woodpecker.util.Constant;
@@ -159,35 +161,38 @@ public class ExcelBuilder<T> {
 				}
 			}
 			
-			//省校验
-			if(BusinessCheckType.province.equals(fieldCache.getCheckType())) {
-				ExcelCheckServer excelCheckServer = new ProvinceCheckServerImpl();
-				if(excelCheckServer.doCheck(o,fieldCache) == false) {
-					excelCheckServer.printRecord(o,Constant.provinceMsg,fieldCache);
+			if(BusinessCheckType.province.equals(fieldCache.getCheckType()) || BusinessCheckType.city.equals(fieldCache.getCheckType()) || BusinessCheckType.area.equals(fieldCache.getCheckType()) || BusinessCheckType.street.equals(fieldCache.getCheckType())) {
+				
+				//省校验
+				if(BusinessCheckType.province.equals(fieldCache.getCheckType())) {
+					ExcelCheckServer excelCheckServer = new ProvinceCheckServerImpl();
+					if(excelCheckServer.doCheck(o,fieldCache) == false) {
+						excelCheckServer.printRecord(o,Constant.provinceMsg,fieldCache);
+					}
 				}
-			}
-			
-			//省、市校验
-			if(BusinessCheckType.city.equals(fieldCache.getCheckType())) {
-				ExcelCheckServer excelCheckServer = new EmailFormatCheckServerImpl();
-				if(excelCheckServer.doCheck(o,fieldCache) == false) {
-					excelCheckServer.printRecord(o,Constant.phoneMsg,fieldCache);
+				
+				//省、市校验
+				if(BusinessCheckType.city.equals(fieldCache.getCheckType())) {
+					ExcelCheckServer excelCheckServer = new ProvinceCityCheckServerImpl();
+					if(excelCheckServer.doCheck(o,fieldCache) == false) {
+						excelCheckServer.printRecord(o,Constant.provinceCityMsg,fieldCache);
+					}
 				}
-			}
-			
-			//省、市、区校验
-			if(BusinessCheckType.area.equals(fieldCache.getCheckType())) {
-				ExcelCheckServer excelCheckServer = new EmailFormatCheckServerImpl();
-				if(excelCheckServer.doCheck(o,fieldCache) == false) {
-					excelCheckServer.printRecord(o,Constant.phoneMsg,fieldCache);
+				
+				//省、市、区校验
+				if(BusinessCheckType.area.equals(fieldCache.getCheckType())) {
+					ExcelCheckServer excelCheckServer = new  ProvinceCityAreaCheckServerImpl();
+					if(excelCheckServer.doCheck(o,fieldCache) == false) {
+						excelCheckServer.printRecord(o,Constant.provinceCityAreaMsg,fieldCache);
+					}
 				}
-			}
-			
-			//省、市、区、街道校验
-			if(BusinessCheckType.street.equals(fieldCache.getCheckType())) {
-				ExcelCheckServer excelCheckServer = new EmailFormatCheckServerImpl();
-				if(excelCheckServer.doCheck(o,fieldCache) == false) {
-					excelCheckServer.printRecord(o,Constant.phoneMsg,fieldCache);
+				
+				//省、市、区、街道校验
+				if(BusinessCheckType.street.equals(fieldCache.getCheckType())) {
+					ExcelCheckServer excelCheckServer = new EmailFormatCheckServerImpl();
+					if(excelCheckServer.doCheck(o,fieldCache) == false) {
+						excelCheckServer.printRecord(o,Constant.phoneMsg,fieldCache);
+					}
 				}
 			}
 			
