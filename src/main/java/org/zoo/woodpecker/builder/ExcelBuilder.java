@@ -22,6 +22,7 @@ import org.zoo.woodpecker.handler.impl.PhoneCheckServerImpl;
 import org.zoo.woodpecker.util.ClassUtils;
 import org.zoo.woodpecker.util.ClassUtils.FieldCache;
 import org.zoo.woodpecker.util.Constant;
+import org.zoo.woodpecker.util.RegionUtil;
 import org.zoo.woodpecker.util.StringUtil;
 import org.zoo.woodpecker.util.WoodpeckerReflector;
 
@@ -112,7 +113,7 @@ public class ExcelBuilder<T> {
 			//手机号校验
 			if(BusinessCheckType.phone.equals(fieldCache.getCheckType())) {
 				ExcelCheckServer excelCheckServer = new PhoneCheckServerImpl();
-				if(excelCheckServer.doCheck(fieldCache) == false) {
+				if(excelCheckServer.doCheck(o,fieldCache) == false) {
 					excelCheckServer.printRecord(o,Constant.phoneMsg,fieldCache);
 				}
 			}
@@ -120,7 +121,7 @@ public class ExcelBuilder<T> {
 			//身份证号校验
 			if(BusinessCheckType.idcard.equals(fieldCache.getCheckType())) {
 				ExcelCheckServer excelCheckServer = new IdCardCheckServerImpl();
-				if(excelCheckServer.doCheck(fieldCache) == false) {
+				if(excelCheckServer.doCheck(o,fieldCache) == false) {
 					excelCheckServer.printRecord(o,Constant.idcardMsg,fieldCache);
 				}
 			}
@@ -128,7 +129,7 @@ public class ExcelBuilder<T> {
 			//数字格式校验
 			if(BusinessCheckType.number.equals(fieldCache.getCheckType())) {
 				ExcelCheckServer excelCheckServer = new NumberFormatCheckServerImpl();
-				if(excelCheckServer.doCheck(fieldCache) == false) {
+				if(excelCheckServer.doCheck(o,fieldCache) == false) {
 					excelCheckServer.printRecord(o,"",fieldCache);
 				}
 			}
@@ -136,7 +137,7 @@ public class ExcelBuilder<T> {
 			//英文格式校验
 			if(BusinessCheckType.en.equals(fieldCache.getCheckType())) {
 				ExcelCheckServer excelCheckServer = new EnFormatCheckServerImpl();
-				if(excelCheckServer.doCheck(fieldCache) == false) {
+				if(excelCheckServer.doCheck(o,fieldCache) == false) {
 					excelCheckServer.printRecord(o,"",fieldCache);
 				}
 			}
@@ -144,7 +145,7 @@ public class ExcelBuilder<T> {
 			//中文格式校验
 			if(BusinessCheckType.cn.equals(fieldCache.getCheckType())) {
 				ExcelCheckServer excelCheckServer = new CnFormatCheckServerImpl();
-				if(excelCheckServer.doCheck(fieldCache) == false) {
+				if(excelCheckServer.doCheck(o,fieldCache) == false) {
 					excelCheckServer.printRecord(o,"",fieldCache);
 				}
 			}
@@ -152,23 +153,22 @@ public class ExcelBuilder<T> {
 			//邮箱格式校验
 			if(BusinessCheckType.email.equals(fieldCache.getCheckType())) {
 				ExcelCheckServer excelCheckServer = new EmailFormatCheckServerImpl();
-				if(excelCheckServer.doCheck(fieldCache) == false) {
+				if(excelCheckServer.doCheck(o,fieldCache) == false) {
 					excelCheckServer.printRecord(o,Constant.emailMsg,fieldCache);
 				}
 			}
 			
 			//省校验
 			if(BusinessCheckType.province.equals(fieldCache.getCheckType())) {
-				ExcelCheckServer excelCheckServer = new EmailFormatCheckServerImpl();
-				if(excelCheckServer.doCheck(fieldCache) == false) {
-					excelCheckServer.printRecord(o,Constant.phoneMsg,fieldCache);
+				if(RegionUtil.provinceCheck(fieldCache.getValue())) {
+					ClassUtils.writeErrorInfoField(o,Constant.provinceMsg,fieldCache);
 				}
 			}
 			
 			//省、市校验
 			if(BusinessCheckType.city.equals(fieldCache.getCheckType())) {
 				ExcelCheckServer excelCheckServer = new EmailFormatCheckServerImpl();
-				if(excelCheckServer.doCheck(fieldCache) == false) {
+				if(excelCheckServer.doCheck(o,fieldCache) == false) {
 					excelCheckServer.printRecord(o,Constant.phoneMsg,fieldCache);
 				}
 			}
@@ -176,7 +176,7 @@ public class ExcelBuilder<T> {
 			//省、市、区校验
 			if(BusinessCheckType.area.equals(fieldCache.getCheckType())) {
 				ExcelCheckServer excelCheckServer = new EmailFormatCheckServerImpl();
-				if(excelCheckServer.doCheck(fieldCache) == false) {
+				if(excelCheckServer.doCheck(o,fieldCache) == false) {
 					excelCheckServer.printRecord(o,Constant.phoneMsg,fieldCache);
 				}
 			}
@@ -184,7 +184,7 @@ public class ExcelBuilder<T> {
 			//省、市、区、街道校验
 			if(BusinessCheckType.street.equals(fieldCache.getCheckType())) {
 				ExcelCheckServer excelCheckServer = new EmailFormatCheckServerImpl();
-				if(excelCheckServer.doCheck(fieldCache) == false) {
+				if(excelCheckServer.doCheck(o,fieldCache) == false) {
 					excelCheckServer.printRecord(o,Constant.phoneMsg,fieldCache);
 				}
 			}

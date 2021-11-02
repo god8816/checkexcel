@@ -15,7 +15,7 @@ import org.zoo.woodpecker.util.StringUtil;
  */
 public class EnFormatCheckServerImpl extends ExcelCheckServer{
 
-	public Boolean doCheck(FieldCache fieldCache) {
+	public Boolean doCheck(Object o,FieldCache fieldCache) {
 		String value = StringUtil.toString(fieldCache.getValue());
 		String regularExpVlue = fieldCache.getRegularExp();
 		if(StringUtil.isEmpty(regularExpVlue)) {

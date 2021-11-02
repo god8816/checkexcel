@@ -24,7 +24,7 @@ public class RegionUtil {
 	private volatile static List<RegionBean> singletonRegionList;  
 	
     /**加载省市区街道数据*/ 
-    public static List<RegionBean> regionList(){
+	private static List<RegionBean> regionList(){
     	if (singletonRegionList == null) {  
 	        synchronized (ExcelBuilder.class) {  
 		        if (singletonRegionList == null) {  
@@ -41,6 +41,29 @@ public class RegionUtil {
 	    }  
 	    return singletonRegionList; 
 	} 
+	
+	
+    /**加载省市区街道数据*/ 
+	public static boolean provinceCheck(Object province){
+		//名称校验
+		if(province instanceof String) {
+			long num =  regionList().stream().filter(x->x.getProvinceName().equals(province)).count();
+			if(num>0) {
+				return true;
+			}
+		}
+		
+		//编码校验
+		if(province instanceof Integer) {
+			long num =  regionList().stream().filter(x->x.getProvinceCode().equals(province)).count();
+			if(num>0) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	
     
     public static void main(String[] args) {
     	regionList();

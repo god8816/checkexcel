@@ -12,5 +12,7 @@ public class Constant {
 
    public static String emailMsg= "邮箱格式异常;";
 
-   public static String repeatMsg = "记录重复;"; 
+   public static String repeatMsg = "记录重复;";
+
+   public static String provinceMsg =  "省填写错误;"; 
 }

@@ -12,8 +12,9 @@ public abstract class ExcelCheckServer {
 	/**
 	 * 字段检查
 	 * @param fieldCache 
+	 * @param o
 	 * */
-	public abstract Boolean doCheck(FieldCache fieldCache);
+	public abstract Boolean doCheck(Object o,FieldCache fieldCache);
 
 	/**
 	 * 获取错误提示语并打印
